@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>各类标签使用示范</title> 
+</head>
+<body>
+<!-- label和input绑定 label一般用于和表单元素绑定 -->
+<form>
+    <label for="account">账号</label>
+    <input type="text" name="account" id="account">
+    <label for="password">密码</label>
+    <input type="password" name="password" id="password">
+</form>
+<br>
+<br>
+<!--  待选列表  -->
+    查询车品牌<input type="text" list="cars">
+    <datalist id="cars">
+        <option>宝马</option>
+        <option>马自达</option>
+        <option>奔驰</option>
+        <option>本田</option>
+        <option>丰田</option>
+        <option>现代</option>
+        <option>宝辰</option>
+    </datalist>
+<br>
+<br>
+<!-- select -->
+    <select>
+        <option>上海</option>
+        <option>杭州</option>
+        <option>苏州</option>
+        <option selected>重庆</option>
+        <option>成都</option>
+    </select>
+<br>
+    <select>
+        <optgroup label="北京">
+            <option>朝阳</option>
+            <option>东城</option>
+            <option>海淀</option>
+            <option>通州</option>
+        </optgroup>
+        <optgroup label="重庆">
+            <option>北碚</option>
+            <option>渝中</option>
+            <option>江北</option>
+        </optgroup>
+    </select>
+<br>
+<br>
+<!-- textarea 多行文本 -->
+<textarea cols="8" rows="6">请输入内容</textarea>
+<br>
+<br>
+<!-- radio name属性要一致 -->
+<input type="radio" name="gender" value="man">男
+<input type="radio" name="gender" value="woman">女
+<input type="radio" name="gender" value="n" checked="checked">保密
+<br>
+<br>
+<input type="checkbox" name="habit" value="swim">游泳
+<input type="checkbox" name="habit" value="sport">健身
+<input type="checkbox" name="habit" value="sing">唱歌
+</body>
+
+<br>
+<br>
+<!--
+    video
+    controls:控制条
+    loop:循环播放
+    poster:封面
+    preload:预加载
+    autoplay:自动播放
+    muted:静音
+-->
+<video src="E://视频/Honor.mp4" autoplay="autoplay" controls="controls" poster="C://Users/Administrator/Desktop/20181108204521_83402.jpg"></video>
+<video>
+    <!--解决不同浏览器适配问题-->
+    <source src="" type="">
+    <source src="" type="">
+</video>
+
+<br>
+<br>
+<!-- audio -->
+<audio src=""></audio>
+<audio>
+    <source src="" type="">
+    <source src="" type="">
+    <source src="" type="">
+</audio>
+
+<br>
+<br>
+<!-- details -->
+<details>
+    <summary>概要信息</summary>
+    详情信息详情信息嘻嘻你休息嘻嘻逆袭
+</details>
+
+<br>
+<br>
+<!-- marquee 跑马灯 -->
+<marquee>hahaha</marquee>
+<marquee direction="right">hahaha</marquee>
+<marquee direction="up">hahaha</marquee>
+<marquee direction="right" scrollamount="5">hahaha</marquee>
+
+<br>
+<br>
+<!-- 废弃的标签 -->
+<p>
+    b u i s 是被废弃的标签，因为他们没有语义 <br>
+    他们的替代标签是：
+    strong:定义重要性强调的文字
+    ins:定义插入的文字
+    em:定义强调的文字
+    del:定义被删除的文字
+</p>
+</html>
