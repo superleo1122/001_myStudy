@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        ul{
+            list-style-type: none;
+            width: 800px;
+            height: 50px;
+            margin: 100px auto;
+        }
+
+        ul>li{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            background: yellow;
+            text-align: center;
+            float: left;
+        }
+
+        ul>li:hover{
+            background: green;
+        }
+
+        ul>li>a{
+            /*
+                通过设置宽高等于父元素，可以使小手指的范围扩大到和父元素一样，当然这里也可以是使用cursor属性
+            */
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a href="#">我是导航</a></li>
+    <li><a href="#">我是导航</a></li>
+    <li><a href="#">我是导航</a></li>
+    <li><a href="#">我是导航</a></li>
+    <li><a href="#">我是导航</a></li>
+    <li><a href="#">我是导航</a></li>
+    <li><a href="#">我是导航</a></li>
+    <li><a href="#">我是导航</a></li>
+</ul>
+</body>
+</html>

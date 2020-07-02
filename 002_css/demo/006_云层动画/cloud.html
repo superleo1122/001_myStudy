@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cloud</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        ul{
+            height: 400px;
+            background: skyblue;
+            margin-top: 100px;
+            list-style: none;
+            animation-name: change;
+            animation-duration: 5s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul li{
+            width: 400%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        ul li:nth-child(1){
+            /*背景图会平铺*/
+            background: url("images/cloud_one.png");
+            animation: one 30s linear 0s alternate infinite;
+
+        }
+
+        ul li:nth-child(2){
+            /*背景图会平铺*/
+            background: url("images/cloud_two.png");
+            animation: two 30s linear 0s alternate infinite;
+
+        }
+
+        ul li:nth-child(3){
+            /*背景图会平铺*/
+            background: url("images/cloud_three.png");
+            animation: three 30s linear 0s alternate infinite;
+
+        }
+
+        @keyframes one{
+            from{
+                margin-left: 0;
+            }
+            to{
+                margin-left: -100%;
+            }
+        }
+
+        @keyframes two{
+            from{
+                margin-left: 0;
+            }
+            to{
+                margin-left: -200%;
+            }
+        }
+
+        @keyframes three{
+            from{
+                margin-left: 0;
+            }
+            to{
+                margin-left: -300%;
+            }
+        }
+
+        @keyframes change {
+            from{
+                background: skyblue;
+            }
+            to{
+                background: black;
+            }
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>

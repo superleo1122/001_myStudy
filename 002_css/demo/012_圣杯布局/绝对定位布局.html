@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圣杯布局</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .box{
+            padding:0 200px 0 200px;
+            position: relative;
+            background: #000;
+        }
+
+        .center{
+            width: 100%;
+            height: 200px;
+            background: skyblue;
+            float: left;
+        }
+
+        .left{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .right{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<!--
+    使用绝对定位+浮动也能达到两端固定，中间自适应的效果，但它有个致命缺点，当两边高度过长时，由于是绝对定位，他不能将父元素一同撑开，这样会导致过高的两端把footer给遮蔽掉
+-->
+
+<div class="box">
+    <div class="center">sdfsdfsdfsdddddddddddddddsfsjdlkf jsdlfjlsjdflksdjflksdjflkjsdddddffffffffffffffffffffffffffff我的上帝律法接受了对方结束了吉林省的肌肤老师交流反馈技术到了房间索拉卡睡了几个了恐惧感脸上的恐o我的上帝律法接受了对方结束了吉林省的肌肤老师交流反馈技术到了房间索拉卡睡了几个了恐惧感脸上的恐惧感了ffff</div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+</body>
+</html>

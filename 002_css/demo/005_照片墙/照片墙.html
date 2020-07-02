@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>照片墙</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        ul{
+            list-style: none;
+            height: 400px;
+            border: 1px solid black;
+            background: skyblue;
+            margin-top: 150px;
+            text-align: center;
+            padding-top: 120px;
+        }
+
+        ul li{
+            width: 150px;
+            height: 200px;
+            background:yellow;
+            display: inline-block;
+            transition-property: all;
+            transition-duration: 0.5s;
+            border: 3px solid white;
+            position: relative;
+            box-shadow: 0 0 5px;
+        }
+
+        ul li img{
+            width: 150px;
+            height: 200px;
+        }
+
+        ul li:nth-child(1){
+            transform: rotate(30deg);
+        }
+
+        ul li:nth-child(2){
+            transform: rotate(-30deg);
+        }
+
+        ul li:nth-child(3){
+            transform: rotate(62deg);
+        }
+
+        ul li:nth-child(4){
+            transform: rotate(10deg);
+        }
+
+        ul li:hover{
+            /*transform: none;*/ /* 去除所有2D转换，这个写法专业 */
+            /*transform: rotate(0);*/   /* 下面的会覆盖掉，所以不写也没事 */
+            transform: scale(2);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><img src="images/1.jpg" alt=""></li>
+    <li><img src="images/2.jpg" alt=""></li>
+    <li><img src="images/3.jpg" alt=""></li>
+    <li><img src="images/4.jpg" alt=""></li>
+</ul>
+</body>
+</html>

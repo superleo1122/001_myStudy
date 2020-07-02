@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .box{
+            display: flex;
+            background: skyblue;
+            align-items:flex-start;
+        }
+
+        .left{
+            flex: 0 1 200px;
+            background: red;
+            order: -1;
+            height: 300px;
+        }
+
+        .right{
+            flex: 0 1 200px;
+            background: red;
+            height: 200px;
+        }
+
+        .center{
+            flex: 1;
+            background: seagreen;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<!--
+    用弹性盒来实现两侧宽度固定，中间自适应布局看来也是可以的哈
+-->
+
+<div class="box">
+    <div class="center"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>124-滑动门</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*
+        div{
+            width: 200px;
+            height: 60px;
+            background: red url("images/nav-all.jpg") no-repeat;
+            background-size: 200px 60px;
+            margin: 200px auto;
+        }
+        */
+        /*
+        .main{
+            width: 100px;
+            height: 60px;
+            background: red url("images/nav-left2.jpg") no-repeat;
+            margin: 200px auto;
+        }
+        .right{
+            width: 20px;
+            height: 60px;
+            background: url("images/nav-right.jpg") no-repeat;
+            float: right;
+        }
+        */
+        .all{
+            width: 100px;
+            height: 60px;
+            background: red url("images/nav-center.jpg") repeat-x;
+            margin: 200px auto;
+        }
+        .left{
+            width: 100%;
+            height: 100%;
+            background: url("images/nav-left.jpg") no-repeat;
+        }
+        .right{
+            width: 100%;
+            height: 100%;
+            background: url("images/nav-right.jpg") center right no-repeat;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="main">
+    <div class="right"></div>
+</div>-->
+
+<!--
+    这里使用了多个div层层嵌套，我认为使用一个div，然后多重背景也能办到
+-->
+<div class="all">
+    <div class="left">
+        <div class="right"></div>
+    </div>
+</div>
+</body>
+</html>

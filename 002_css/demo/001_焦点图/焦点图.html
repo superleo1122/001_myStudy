@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        div{
+            width: 520px;
+            height: 280px;
+            margin: 100px auto;
+            border: 2px solid orangered;
+            position: relative;
+        }
+
+        div span{
+            position: absolute;
+            width: 30px;
+            height: 50px;
+            background: rgba(0,0,0,0.3);
+            font-size: 28px;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .leftArrow{
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .rightArrow{
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        ol{
+            list-style-type: none;
+            width: 172px;
+            height: 40px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        ol>li{
+            width: 40px;
+            height: 40px;
+            background: yellow;
+            text-align: center;
+            line-height: 40px;
+            float: left;
+            margin-right: 3px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <img src="images/ad.jpg" alt="">
+    <span class="leftArrow">&lt;</span>
+    <span class="rightArrow">&gt;</span>
+    <ol>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ol>
+</div>
+</body>
+</html>

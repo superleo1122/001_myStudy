@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无限滚动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div{
+            margin: 150px auto;
+            width: 600px;
+            height: 188px;
+            border: 1px solid black;
+            overflow: hidden;
+            background: black;
+        }
+
+        ul{
+            list-style: none;
+            width: 1800px;
+            animation: move 6s linear 0s infinite;
+        }
+
+        ul li{
+            width: 300px;
+            height: 188px;
+            float: left;
+        }
+
+        ul:hover{
+            /* 动画添加给谁，就让谁停止 */
+            animation-play-state: paused;
+        }
+
+        ul:hover li{
+            opacity: 0.5;
+        }
+
+        ul li:hover{
+            opacity: 1;
+        }
+
+        @keyframes move {
+            from {
+                margin-left: 0;
+            }
+            to{
+                margin-left: -1200px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li><img src="images/banner1.jpg" alt=""></li>
+        <li><img src="images/banner2.jpg" alt=""></li>
+        <li><img src="images/banner3.jpg" alt=""></li>
+        <li><img src="images/banner4.jpg" alt=""></li>
+        <li><img src="images/banner1.jpg" alt=""></li>
+        <li><img src="images/banner2.jpg" alt=""></li>
+    </ul>
+</div>
+</body>
+</html>
