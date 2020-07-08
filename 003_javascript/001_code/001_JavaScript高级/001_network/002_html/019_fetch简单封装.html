@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class EasyHttp{
+        static obj2str(data){
+            data = data || {};
+            // data.t = (Math.random()+"").replace(".","");
+            data.t = new Date().getTime();
+            let arr = [];
+            for (let key in data){
+                // 对key和value进行编码 因为url中不能出现中文
+                arr.push(encodeURI(key)+"="+encodeURI(data[key]));
+            }
+            return arr.join("&");
+        }
+
+        static get(url, params) {
+            return new Promise(function (resolve, reject) {
+                let newUrl = url;
+                // instanceof判断该对象是否是某个的实例，typeof判断的是对象的类型
+                if (params !== undefined && params instanceof Object){
+                    let str = EasyHttp.obj2str(params);
+                    newUrl += "?" + str;
+                }
+
+                fetch(newUrl, {
+                    method: "get"
+                }).then(function (res) {
+                    resolve(res.json());
+                }).catch(function (e) {
+                    reject(e);
+                })
+            });
+        }
+
+        static post(url, params){
+            return new Promise(function (resolve, reject) {
+                fetch(url, {
+                    method: "post",
+                    body: JSON.stringify(params),
+                }).then(function (res) {
+                    resolve(res.json());
+                }).catch(function (e) {
+                    reject(e);
+                })
+            });
+        }
+    }
+</script>
+<script>
+    EasyHttp.get("www.baidu.com", {
+        name:"leo",
+        age:10
+    }).then(function (data) {
+        console.log(data);
+    }).catch(function (e) {
+        console.log(e);
+    })
+</script>
+</body>
+</html>

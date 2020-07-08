@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-swiper高级使用</title>
+    <link rel="stylesheet" href="resource/css/swiper.css">
+    <script src="resource/js/swiper.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .swiper-container{
+            width: 400px;
+            height: 300px;
+            border: 1px solid #000;
+            margin: 100px auto;
+        }
+        .swiper-container>ul{
+            list-style: none;
+        }
+        .swiper-pagination-bullet{
+            background: red;
+        }
+        .swiper-button-next{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="swiper-container">
+    <ul class="swiper-wrapper">
+        <li class="swiper-slide">Slide 1</li>
+        <li class="swiper-slide">Slide 2</li>
+        <li class="swiper-slide">Slide 3</li>
+    </ul>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+<script>
+    let mySwiper = new Swiper ('.swiper-container', {
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        loop: true, // 循环模式选项
+        // autoplay:true, // 自动轮播
+        // autoplay: {
+        //     delay: 1000,//1秒切换一次
+        // },
+        speed:5000, //设置切换速度
+    });
+</script>
+</body>
+</html>

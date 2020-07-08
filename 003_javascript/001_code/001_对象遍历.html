@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象遍历</title>
+</head>
+<body>
+<script>
+
+    /**
+     *  for in循环遍历只能遍历对象本身的属性，不能遍历原型上的属性
+     */
+
+    // 遍历ES6类
+    class Person{
+        constructor(myName,myAge){
+            this.name = myName;
+            this.age = myAge;
+            this.say = function () {
+                console.log("i am say");
+            }
+        }
+    }
+    let person = new Person("leo",13);
+    for (let key in person) {
+        // 打印所有属性
+        if (person[key] instanceof Function) {
+            continue;
+        }
+        console.log(person[key]);
+    }
+
+    // 遍历ES5类
+    function Animate(aColor, aFooter) {
+        this.color = aColor;
+        this.footer = aFooter;
+        this.eat = function () {
+            console.log("animate can eat");
+        }
+    }
+    let animate = new Animate("blue",4);
+    for (let key in animate){
+        if (animate[key] instanceof Function){
+            continue;
+        }
+        console.log(animate[key]);
+    }
+</script>
+</body>
+</html>

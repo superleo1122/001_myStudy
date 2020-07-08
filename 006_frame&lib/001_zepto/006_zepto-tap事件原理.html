@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="myJS/myTap.js"></script>
+</head>
+<body>
+<div></div>
+<script>
+    /**
+     *  移动单击事件特点
+     *      1. 只有一根手指
+     *      2. 按下和离开时间不能超过100ms
+     *      3. 按下和离开距离不能大于5px
+     *
+     */
+    let oDiv = document.querySelector("div");
+    let startTime = 0;
+    let startX = 0;
+    let startY = 0;
+    oDiv.ontouchstart = function (event) {
+        // 判断是否只有一根手指
+        if (event.targetTouches.length>1){
+            return;
+        }
+        startX = event.targetTouches[0].clientX;
+        startY = event.targetTouches[0].clientY;
+        startTime = Date.now();
+    };
+    oDiv.ontouchend = function (event) {
+        if (event.targetTouches.length>1){
+            return;
+        }
+        let endX = event.targetTouches[0].clientX;
+        let endY = event.targetTouches[0].clientY;
+        if (Math.abs(endX - startX) > 5 || Math.abs(endY - startY)){
+            return;
+        }
+        let endTime = Date.now();
+        if ((endTime - startTime) > 100){
+            return;
+        }
+        console.log("单机时间");
+    }
+
+    /****************************************************************************/
+
+    Tap(oDiv,function () {
+        console.log("单击事件");
+    })
+</script>
+</body>
+</html>

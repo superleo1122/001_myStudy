@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+        1.深拷贝
+        修改新变量的值不会影响原有变量的值，默认情况下基本数据类型都是深拷贝
+        2.浅拷贝
+        修改新变量的值会影响原有变量的值，默认情况下引用类型都是浅拷贝
+
+    -->
+    <script>
+       // 深拷贝
+        function depCopy(source,target){
+            for (let key in source) {
+                let sourceValue = source[key];
+                if (sourceValue instanceof Object){
+                    let subTarget = new sourceValue.constructor;
+                    target[key] = subTarget;
+                    depCopy(sourceValue,subTarget);
+                } else {
+                    target[key] = sourceValue;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

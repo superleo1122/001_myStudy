@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+    注意点：
+        1.上传文件一般使用post提交
+        2.上传文件必须设置enctype="multipart/form-data"
+
+        上传的文件在php中通过$_FILES获取
+        在php中文件默认会上传到一个临时目录，接收完毕后会自动删除
+-->
+<form action="../001_php/004_post-file.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="upFile"><br><br>
+    <input type="submit" value="上传">
+</form>
+</body>
+</html>

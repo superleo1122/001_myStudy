@@ -1,0 +1,35 @@
+.triangle(@_, @width, @color){
+  width: 0;
+  height: 0;
+  display: inline-block;
+  border-style: solid solid solid solid;
+}
+
+.triangle(Down, @width, @color){
+  //width: 0;
+  //height: 0;
+  border-width: @width;
+  //border-style: solid solid solid solid;
+  border-color: @color transparent transparent transparent;
+}
+.triangle(Top, @width, @color){
+  //width: 0;
+  //height: 0;
+  border-width: @width;
+  //border-style: solid solid solid solid;
+  border-color: transparent transparent @color transparent;
+}
+.triangle(Left, @width, @color){
+  //width: 0;
+  //height: 0;
+  border-width: @width;
+  //border-style: solid solid solid solid;
+  border-color: transparent @color transparent transparent;
+}
+.triangle(Right, @width, @color){
+  //width: 0;
+  //height: 0;
+  border-width: @width;
+  //border-style: solid solid solid solid;
+  border-color: transparent transparent transparent @color;
+}

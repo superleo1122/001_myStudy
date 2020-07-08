@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /**
+         *  fetch
+         *  fetch是ES6中新增的，基于Promise的网络请求方法
+         *
+         *  fetch(url, {options})
+         *  .then()
+         *  .catch()
+         */
+
+        fetch("http://www.baidu.com?name=leo", {
+            method:"get",
+        }).then(function (res) {
+            return res.text(); // 注意这里返回的是一个promise对象
+        }).then(function (data) {
+            console.log(data); // 这里才能拿到服务器返回的内容
+        }).catch(function (e) {
+            console.log(e);
+        });
+
+        fetch("http://www.baidu.com?name=leo", {
+            method:"get",
+        }).then(function (res) {
+            // return res.text(); // 注意这里返回的是一个promise对象
+            return res.json();
+        }).then(function (data) {
+            console.log(data); // 这里才能拿到服务器返回的内容 (前面then返回的是res.text()，则这里拿到的是data是字符串，若前面then返回的是res.json(),则这里拿到的是对象)
+        }).catch(function (e) {
+            console.log(e);
+        });
+
+        fetch("http://www.baidu.com", {
+            method:"post",
+            body: JSON.stringify({name:"leo",age:10}),
+        }).then(function (res) {
+            // return res.text(); // 注意这里返回的是一个promise对象
+            return res.json();
+        }).then(function (data) {
+            console.log(data); // 这里才能拿到服务器返回的内容 (前面then返回的是res.text()，则这里拿到的是data是字符串，若前面then返回的是res.json(),则这里拿到的是对象)
+            console.log(typeof data);
+        }).catch(function (e) {
+            console.log(e);
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

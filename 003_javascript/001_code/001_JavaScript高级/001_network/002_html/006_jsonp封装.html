@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="../js/myJsonp.js"></script>
+<script>
+    myJSONP({
+        url:"http://127.0.0.1:80/ajax/001_php/005_jQuery-jsonp.php",
+        // jsonp: "cb",  // 告诉jQuery服务器在获取回调函数名称时需要用什么key来获取，若不设置这个参数，key默认为callback
+        jsonpCallback: "test",  // 设置回调函数名称，若不设置，默认是一个随机字符串
+        success: function (msg) {
+            // jQuery会把服务端返回的回调函数的参数传入到msg中，不用我们创建回调函数
+            console.log(msg);
+        }
+    });
+</script>
+</body>
+</html>

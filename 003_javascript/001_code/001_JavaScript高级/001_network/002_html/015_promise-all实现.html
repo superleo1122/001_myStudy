@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+            Promise特点
+            1. 创建时必须传入一个函数，否则报错
+            2. 会给传入的函数设置两个回调函数
+            3. 刚创建的Promise对象状态是pending
+            4. 状态一旦发生改变就不可再次改变
+            5. 可以通过then来监听状态的变化
+                   若添加监听时状态已改变，立即执行监听的回调
+                   若添加监听时状态还未改变，则状态改变时执行监听回调函数
+            6. 同一个Promise对象可以添加多个then监听，状态改变时所有的监听按照添加顺序执行
+        */
+    </script>
+    <script>
+        const PENDING = "pending";
+        const FULFILLED = "fulfilled";
+        const REJECTED = "rejected";
+
+        class MyPromise{
+            constructor(handler) {
+                // 0.初始化默认状态
+                this.status = PENDING;
+                // 定义变量保存存入的参数
+                this.value = undefined;
+                this.reason = undefined;
+                // 定义变量保存监听的函数
+                this.onResolvedCallbacks = [];
+                this.onRejectedCallbacks = [];
+                // 1.判断是否传入了一个函数，若没有传入就抛出一个异常
+                if (!this._isFunction(handler)){
+                    throw new Error("请传入一个函数");
+                }
+                // 2.给传入的函数传递形参
+                handler(this._resolve.bind(this), this._reject.bind(this));
+            }
+
+            then(onResolved, onRejected){
+                return new MyPromise((nextResolve, nextReject) => {
+                    // 1.判断有没传入成功的回调
+                    if (this._isFunction(onResolved)){
+                        if (this.status === FULFILLED){
+                            try {
+                                // 拿到上一个promise成功回调结果
+                                let result = onResolved(this.value);
+                                if (result instanceof MyPromise){
+                                    result.then(nextResolve, nextReject);
+                                } else {
+                                    nextResolve(result);
+                                }
+                            } catch (e) {
+                                nextReject(e);
+                            }
+                        }
+                    }
+                    // 2.判断有没传入失败的回调
+                    // if (this._isFunction(onRejected)){
+                        if (this.status === REJECTED){
+                            try {
+                                let result = onRejected(this.reason);
+                                if (result instanceof MyPromise){
+                                    result.then(nextResolve, nextReject);
+                                } else if (result !== undefined){
+                                    nextResolve(result);
+                                } else {
+                                    nextReject();
+                                }
+                            } catch (e) {
+                                nextReject(e);
+                            }
+                        }
+                    // }
+                    // 判断当前的状态是否是默认状态
+                    if (this.status === PENDING){
+                        if (this._isFunction(onResolved)) {
+                            this.onResolvedCallbacks.push(() => {
+                                try {
+                                    let result = onResolved(this.value);
+                                    if (result instanceof MyPromise){
+                                        result.then(nextResolve, nextReject);
+                                    } else {
+                                        nextResolve(result);
+                                    }
+                                } catch (e) {
+                                    nextReject(e);
+                                }
+                            });
+                        }
+                        // if (this._isFunction(onRejected)) {
+                            this.onRejectedCallbacks.push(() => {
+                                try {
+                                    let result = onResolved(this.reason);
+                                    if (result instanceof MyPromise){
+                                        result.then(nextResolve, nextReject);
+                                    } else if (result !== undefined) {
+                                        nextResolve(result);
+                                    } else {
+                                        nextReject();
+                                    }
+                                } catch (e) {
+                                    nextReject(e);
+                                }
+                            });
+                        // }
+                    }
+                });
+            }
+
+            catch(onRejected){
+                return this.then(undefined, onRejected);
+            }
+
+            _resolve(value){
+                if (this.status === PENDING){
+                    this.status = FULFILLED;
+                    this.value = value;
+                    this.onResolvedCallbacks.forEach(fn => fn(this.value));
+                }
+            }
+            
+            _reject(reason){
+                if (this.status === PENDING){
+                    this.status = REJECTED;
+                    this.reason = reason;
+                    this.onRejectedCallbacks.forEach(fn => fn(this.reason));
+                }
+            }
+            
+            _isFunction(fn){
+                return typeof fn === "function";
+            }
+
+            static all(list) {
+                return new MyPromise(function (resolve, reject) {
+                    let arr = [];
+                    let count = 0;
+                    for (let i=0; i<list.length; i++){
+                        let p = list[i];
+                        p.then(function (value) {
+                            arr.push(value);
+                            count++;
+                            if (count === list.length){
+                                resolve(arr);
+                            }
+                        }).catch(function (msg) {
+                            reject(msg);
+                        });
+                    }
+                });
+            }
+        }
+    </script>
+    <script>
+        let promise = new MyPromise(function (resolve, reject) {
+            resolve();
+            reject();
+        });
+        console.log(promise);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

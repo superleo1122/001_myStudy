@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+            1. 创建Promise对象
+            new Promise(function(resolve, reject){});
+            只要创建promise对象就会立即执行存放的代码
+
+            2. Promise实现同步流程表示异步操作的原理
+            promise对象是通过状态的改变来实现的，只要状态发生改变就会自动触发对应的函数
+
+            3. promise对象的三种状态
+                pending: 默认状态，只要没有告诉promise对象任务是成功还是失败就是pending状态
+                fulfilled(resolved): 只要调用resolved函数，状态就会变为fulfilled，表示操作成功
+                rejected: 只要调用rejected函数，状态就会变为rejected状态，表示操作失败
+                    状态一旦改变就不可逆，即只能 pending -> fulfilled
+                                              pending -> rejected
+
+            4. 监听promise状态改变
+                可以通过函数来监听状态的改变
+                resolved --> then()
+                rejected --> catch()
+
+        */
+
+        let promise = new Promise(function (resolve, reject) {
+            console.log("new promise");
+            // reject();
+            resolve();
+        });
+
+        promise.then(function () {
+            console.log("then");
+        });
+
+        promise.catch(function () {
+            console.log("catch");
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

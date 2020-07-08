@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-JavaScript-图片展示</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 670px;
+            border: 1px solid #000;
+            margin: 100px auto;
+        }
+        ul{
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+        }
+        ul>li>img{
+            width: 120px;
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <img src="images/ad1.jpg" alt="">
+    <ul>
+        <li><img src="images/ad1.jpg" alt=""></li>
+        <li><img src="images/ad2.jpg" alt=""></li>
+        <li><img src="images/ad3.jpg" alt=""></li>
+        <li><img src="images/ad4.jpg" alt=""></li>
+        <li><img src="images/ad5.jpg" alt=""></li>
+    </ul>
+</div>
+<script>
+    let oImg = document.querySelector("div>img");
+    let oItems = document.querySelectorAll("li>img");
+    // console.log(oItems);
+    for(let item of oItems){
+        /*
+        item.onclick = function () {
+            // console.log(this.src);
+            oImg.src = this.src;
+        }
+        */
+        item.onclick = change;
+    }
+    function change() {
+        // console.log(this.src);
+        oImg.src = this.src;
+    }
+
+    /*
+    let obj1 = {name:"zs"};
+    let obj2 = {name:"ls"};
+    obj1.say = function () {
+        console.log("hello");
+    }
+    obj2.say = function () {
+        console.log("hello");
+    }
+    console.log(obj1.say === obj2.say); // false
+    */
+
+    /*
+    let obj1 = {name:"zs"};
+    let obj2 = {name:"ls"};
+    function say() {
+        console.log("hello");
+    }
+    obj1.say = say;
+    obj2.say = say;
+    console.log(obj1.say === obj2.say); // true
+    */
+</script>
+</body>
+</html>

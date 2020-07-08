@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        let arr = [1,3,5];
+
+        /**
+         *  forEach
+         */
+        arr.forEach(function (value, index, array) {
+            console.log(value,index,array);
+        });
+        Array.prototype.myForEach = function (fn) {
+            for (let i = 0; i < this.length; i++) {
+                fn(this[i], i, this);
+            }
+        };
+
+        /**
+         *  findIndex : 找到返回索引，没有找到返回-1
+         */
+        let index = arr.findIndex(function (value, index, array) {
+            if (3 === value) {
+                return true;
+            }
+        });
+        Array.prototype.myFindIndex = function (fn) {
+            for (let i = 0; i < this.length; i++) {
+                let result = fn(this[i], i, this);
+                if (result) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+
+        /**
+         *  find : 只找到返回元素，没有找到返回undefined
+         */
+        let value = arr.find(function (value, index, array) {
+            if (3 === value) {
+                return true;
+            }
+        });
+        Array.prototype.myFind = function (fn) {
+            for (let i=0; i<this.length; i++){
+                let result = fn(this[i], i, this);
+                if (result) {
+                    return this[i];
+                }
+            }
+            return undefined;
+        };
+
+        /**
+         *  filter 将满足元素添加到另一个新数组中
+         */
+        let newArray = arr.filter(function (value, index, array) {
+            if (value < 4) {
+                return true;
+            }
+        });
+        // 此时 newArray = [1,3];
+        Array.prototype.filter = function (fn) {
+            let newArr = [];
+            for (let i = 0; i < this.length; i++) {
+                let result = fn(this[i], i, this);
+                if (result) {
+                    newArr.push(this[i]);
+                }
+            }
+            return newArr;
+        };
+
+        /**
+         *  map 将数组中的元素映射到另一个数组中，在遍历某一个元素时没有返回，则新数组对应值为undefined
+         */
+        let newArr = arr.map(function (value, index, array) {
+            if (value < 4) {
+                return value;
+            }
+        });
+        // 此时newArr = [1,3,undefined]
+        Array.prototype.map = function (fn) {
+            let newArr = [];
+            for(let i=0; i<this.length; i++){
+                let result = fn(this[i], i, this);
+                if (result !== undefined){
+                    newArr[i] = result;
+                }
+            }
+            return newArr;
+        };
+    </script>
+</head>
+<body>
+
+</body>
+</html>

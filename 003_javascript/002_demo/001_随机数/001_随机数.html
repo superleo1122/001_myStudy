@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /**
+     *    0 <= result < 1
+     */
+    function getRandom() {
+        return Math.random();
+    }
+
+    /**
+     *  min <= result < max
+     */
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    /**
+     * 返回一个随机整数 Math.ceil(min) <= result < max
+     */
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //不含最大值，含最小值
+    }
+
+    /**
+     *   返回一个随机整数 min <= result <= max
+     */
+    function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值
+    }
+</script>
+</body>
+</html>

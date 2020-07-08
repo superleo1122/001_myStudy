@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     *  1. Generator()
+     *      Generator函数是ES6中提供的一种异步编程解决方案
+     *      Generator函数内部可以封装多个状态，因此又可以理解为是一个状态机
+     *
+     *  2. 定义Generator函数
+     *      只需要在普通函数的function后面加上*
+     *      function* test(){}
+     *
+     *  3. Generator和普通函数区别
+     *      3.1 调用Generator函数后，无论函数有没有返回值，都会返回一个迭代器对象
+     *      3.2 调用Generator函数后，函数中封装的代码不会立即执行
+     *
+     *  4. 真正让Generator具有价值的是yield关键字
+     *      4.1 在Generator函数内部使用yield关键字定义状态
+     *      4.2 并且yield关键字可以让Generator内部的逻辑能够切割成多个部分
+     *      4.3 通过调用迭代器对象的next方法执行一个部分代码，执行哪个部分就会返回哪个部分定义的状态
+     *      4.4 在调用next方法的时候可以传递一个参数，这个参数会传递给上一个yield
+     */
+</script>
+</body>
+</html>

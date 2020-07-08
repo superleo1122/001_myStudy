@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /**
+         *  在企业开发中通过jsonp获取跨域数据，一般情况下服务器返回的都不会是一个变量，而是一个函数调用。用回调函数来接收参数
+         *  可以通过URL参数来动态指定函数名称 ?method=addJS
+         *  由于script标签默认是同步的，前面的script标签没有加载完数据，后面的script标签就不会被执行，所以请求数据的script必须放到后面
+         *  为了解决script标签同步问题，可以利用JS代码动态创建script标签，因为JS动态创建的script标签默认就是异步的，不用等到前面的标签加载完就可以执行后面的script标签
+         */
+
+         let oScript = document.createElement("script");
+         oScript.src = "http://127.0.0.1:80/jQuery/Ajax/20-jsonp.php?cb=test";
+         document.body.appendChild(oScript);
+
+         function test(data) {
+             console.log(data);
+         }
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

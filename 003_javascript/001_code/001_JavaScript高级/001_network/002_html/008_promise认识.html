@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+            1. promise
+                promise是ES6中新增的异步编程解决方案，在代码中表现为一个对象。(让异步代码有序执行)
+                promise对象可以将异步操作以同步流程来表示，避免了回调函数层层嵌套
+
+         */
+
+        function request() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve("拿到的数据");
+                }, 1000);
+            })
+        }
+
+        request().then(function (data) {
+            console.log(data,1);
+            return request();
+        }).then(function (data) {
+            console.log(data,2);
+            return request();
+        }).then(function (data) {
+            console.log(data,3);
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

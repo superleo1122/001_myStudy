@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-媒体查询基本使用</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*
+        div{
+            width: 500px;
+            height: 500px;
+            background: red;
+        }
+        */
+
+        /*如果当前的网页是显示在电脑or平板or手机上的, 并且当前浏览器的宽度是大于等于1200px的, 那么就执行后面大括号中的代码*/
+        @media screen and (min-width: 1200px){
+            div{
+                width: 500px;
+                height: 500px;
+                background: red;
+            }
+        }
+        /*如果当前的网页是显示在电脑or平板or手机上的, 并且当前浏览器的宽度是小于等于1199px的, 那么就执行后面大括号中的代码*/
+        @media screen and (max-width: 1199px){
+            div{
+                width: 300px;
+                height: 300px;
+                background: green;
+            }
+        }
+        /*如果当前的网页是显示在电脑or平板or手机上的, 并且当前浏览器的宽度是小于等于768px的, 那么就执行后面大括号中的代码*/
+        @media screen and (max-width: 768px){
+            div{
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+        }
+    </style>
+</head>
+<body>
+<!--
+1.什么是媒体查询?
+媒体查询就是获取到当前浏览器的宽度之后, 根据不同的宽度设置元素不同的样式
+
+2.媒体查询的注意点
+由于媒体查询需要根据不同的浏览器宽度调整元素的样式, 所以不适合用于比较复杂的网页
+
+3.媒体查询的格式
+在这里的media可以理解为英文的if(如果)
+@media 条件{} 含义: 如果条件满足, 那么就执行后面{}中的代码
+3.1内联格式: @media 条件{}
+3.2外链格式: <link rel="stylesheet" href="css/xxx.css" media="条件">
+-->
+<div></div>
+</body>
+</html>

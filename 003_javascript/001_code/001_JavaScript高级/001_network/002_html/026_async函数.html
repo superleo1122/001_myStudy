@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     *  1. async函数
+     *  async函数是ES8中新增的一个函数，用以定义一个异步函数
+     *  async函数中的代码会自动从上至下执行
+     *
+     *  2. wait操作符
+     *  await操作符只能在异步函数 async function 中使用
+     *  await表达式会暂停当前 async function 的执行，等待promise处理完成
+     *  若 Promise 处理成功，其回调的resolve函数参数作为await表达式的值，然后继续执行 async function
+     */
+
+    function request() {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve("拿到的数据");
+            },1000);
+        })
+    }
+
+    async function gen() {
+        let res1 = await request();
+        console.log(res1, 1);
+        let res2 = await request();
+        console.log(res2, 2);
+        let res3 = await request();
+        console.log(res3, 3);
+    }
+
+    gen();
+</script>
+</body>
+</html>

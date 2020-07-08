@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>05-Bootstrap容器实现</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @media (min-width: 576px) {
+            .container {
+                max-width: 540px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+        div{
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container"></div>
+<!--
+    Bootstrap中提供了两个容器: container/container-fluid
+    1.container容器(固定容器):    css中宽度设为100%
+    只要给标签添加了container类名, 这个标签就变成了Bootstrap的container容器
+    只要这个标签变成了Bootstrap的container容器, 在不同视口大小下就会有不同的固定宽度
+
+    2.container-fluid(自适应宽度容器)   css中使用媒体查询
+    只要给标签添加了container-fluid类名, 这个标签就变成了Bootstrap的container-fluid容器
+    只要这个标签变成了Bootstrap的container-fluid容器, 那么容器的宽度永远都是100%自适应
+-->
+</body>
+</html>

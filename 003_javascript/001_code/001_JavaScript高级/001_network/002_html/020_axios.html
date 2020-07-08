@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/axios.js"></script>
+    <script>
+        /**
+         *  axios是一个基于promise的HTTP网络请求插件
+         *
+         *  特点：
+         *      1. 可以用在浏览器中和node.js中
+         *      2. 支持Promise API
+         *      3. 自动转换JSON数据
+         *      4. 客户端支持防御 XSRF
+         */
+
+        axios.get("http://www.baidu.com?name=leo")
+            .then(function (res) {
+                console.log(res.data);
+            })
+            .catch(function (e) {
+                console.log(e);
+            });
+
+
+        axios.post("http://www.baidu.com",{
+            name:"leo",
+            age:10
+        })
+            .then(function (res) {
+                console.log(res.data);
+            })
+            .catch(function (e) {
+                console.log(e);
+            });
+
+        /*****************************************************************/
+
+        /**
+         *  axios的全局默认值
+         *      在企业开发中可以将项目分为开发阶段和部署阶段，这两个阶段项目存储的位置是不同的，为此我们可以配置一个全局URL
+         *      根地址，项目上线时只需要修改根地址即可
+         */
+        axios.defaults.timeout = 2000;
+        axios.defaults.baseURL = "http://127.0.0.1";
+        axios.post("/jQuery/Ajax/41.php",{
+            name:"leo",
+            age:10
+        }).then(function (res) {
+            console.log(res.data);
+        }).catch(function (e) {
+            console.log(e);
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

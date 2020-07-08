@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+             1. 同源策略
+                同源策略(same origin policy)是一种约定，它是浏览器醉核心也是醉基本的安全功能
+                所谓同源: 协议，域名，端口都相同就是同源，否则就是跨域
+
+             2. http://www.it666.com:80/index.html
+                协议： http/https
+                一级域名：it666.com
+                二级域名：www/edu/....
+                端口: 80
+
+             3. 在同源策略带来的影响
+                在同源策略下，浏览器只允许Ajax请求同源的数据，不允许请求不同源的数据
+                但在企业开发中，一般情况下，为了提神网页的性能，网页和数据都是单纯存储在不同的服务器上，这时通过Ajax请求数据就会拿不到跨域数据
+
+             4. 跨域解决方案
+                jsonp
+                document.domain + iframe
+                location.hash + iframe
+                window.name + iframe
+                window.postMessage
+                flash等第三方插件
+         */
+    </script>
+</head>
+<body>
+
+</body>
+</html>

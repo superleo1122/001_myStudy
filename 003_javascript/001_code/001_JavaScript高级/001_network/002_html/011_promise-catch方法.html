@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+            catch
+
+            1. catch 是 then(undefined,()=>{}) 的语法糖
+
+            2. 若需要分开监听，即通过then监听成功，catch监听失败，那么必须使用链式编程，否则会报错
+
+            3. catch必须使用链式编程的原因
+                1. 若promise的状态是失败，但是没有对应失败的监听就会报错
+                2. then方法会返回一个新的promise，新的promise会继承原有promise的状态
+                3. 若新的promise状态是失败，但是没有对应失败的监听也会报错
+
+            ***********************************************************************************
+
+            1. 和then一样，在修改promise状态时，可以传递参数给catch方法中的回调函数
+
+            2. 同一个promise对象可以多次调用catch方法，当该promise对象的状态改变时所有catch方法都会被执行
+
+            3. catch方法每次执行完毕都会返回一个新的promise对象
+
+            4. 和then方法一样, 上一个promise对象也可以给下一个promise成功的传递参数
+                注意点:
+                    无论是在上一个promise对象成功的回调还是失败的回调传递的参数,
+                    都会传递给下一个promise对象成功的回调
+
+            5. 和then一样, catch方法如果返回的是一个Promise对象, 那么会将返回的Promise对象的执行结果中的值传递给下一个catch方法
+
+            6. 和then的区别：
+                    和then第二个参数(回调函数)不同，catch方法可以捕获上一个promise对象then方法中的异常
+        */
+    </script>
+</head>
+<body>
+
+</body>
+</html>

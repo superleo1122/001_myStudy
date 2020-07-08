@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<script>
+    /**
+     *  1.Symbol
+     *      Symbol是ES6中新增的一种数据类型，被划分到了基本数据类型中
+     *      基本数据类型：字符串 数值型 布尔值 null undefined Symbol
+     *      引用数据类型：Object
+     *
+     *  2.Symbol作用：
+     *      用来表示一个独一无二的值
+     *
+     *  3.Symbol使用
+     *      let xx = Symbol();
+     *
+     *  4.为什么需要Symbol
+     *      在企业开发中如果需要对一些第三方插件、框架进行自定义的时候
+     *      可能会因为添加了同名的属性或方法，将框架中原有的属性和方法覆盖掉，为了
+     *      避免这种情况发生，框架的作者或者我们就可以使用Symbol作为属性或者方法的名称
+     *
+     *  5.如何区分不同Symbol
+     *      设置标记
+     *      let name = Symbol("name");
+     *
+     *  6. Symbol注意事项
+     *      6.1 做类型转换时不能转换为数值 (只能转为字符串和布尔)
+     *      6.2 不能做任何运算
+     *      6.3 Symbol生成的值作为属性或方法名称时，一定要保存下来，否则后续无法使用
+     *      6.4 for循环无法遍历出Symbol的属性和方法
+     */
+
+    let a = Symbol();
+    // console.log(a);
+    let b = Symbol("name");
+    // console.log(b);
+
+    let name = Symbol("name");
+    let age = Symbol("age");
+    let person = {
+        // 用变量作为属性或方法名称时必须使用[]
+        [name]: "leo",
+        [age]: function () {
+            console.log("i am age");
+        },
+        sex:"nan",
+        eat: function () {
+            console.log("eat");
+        }
+    };
+    for(let key in person){
+        // 无法遍历用Symbol值作为对象属性或方法名称的key
+        console.log(key);
+    }
+    // 但可以这里列出来
+    console.log(Object.getOwnPropertySymbols(person)); // 放入数组中返回
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    let arr = [5,2,-1,29,33,1];
+
+    /**
+     *  选择排序
+     */
+    for(let i = 0; i < 3; i++){
+        for(let j = i; j < 3; j++){
+            // document.write("*");
+            // console.log(i, j + 1);
+            if(arr[i] > arr[j + 1]){
+                let temp = arr[i];
+                arr[i] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+        // document.write("<br>");
+    }
+
+    /**
+     *  冒泡排序
+     */
+    for(let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3 - i; j++) {
+            // document.write("*");
+            // console.log(j, j + 1);
+            if(arr[j] > arr[j + 1]){
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+        // document.write("<br>");
+    }
+</script>
+</body>
+</html>

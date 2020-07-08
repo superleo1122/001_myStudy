@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05-ScrollRevealJS</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 400px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        div:nth-child(odd){
+            background: red;
+        }
+        div:nth-child(even){
+            background: blue;
+        }
+    </style>
+    <script src="js/scrollreveal.js"></script>
+</head>
+<body>
+<div>我是第1个div</div>
+<div>我是第2个div</div>
+<div>我是第3个div</div>
+<div>我是第4个div</div>
+<div>我是第5个div</div>
+<div>我是第6个div</div>
+<div>我是第7个div</div>
+<div>我是第8个div</div>
+<div>我是第9个div</div>
+<div>我是第10个div</div>
+<div>我是第11个div</div>
+<div>我是第12个div</div>
+<div>我是第13个div</div>
+<div>我是第14个div</div>
+<div>我是第15个div</div>
+<div>我是第16个div</div>
+<div>我是第17个div</div>
+<div>我是第18个div</div>
+<div>我是第19个div</div>
+<div>我是第20个div</div>
+<div>我是第21个div</div>
+<div>我是第22个div</div>
+<div>我是第23个div</div>
+<div>我是第24个div</div>
+<div>我是第25个div</div>
+<div>我是第26个div</div>
+<div>我是第27个div</div>
+<div>我是第28个div</div>
+<div>我是第29个div</div>
+<div>我是第30个div</div>
+<script>
+    /*
+    1.什么是scrollReveal?
+    scrollReveal是一个兼容PC端和移动设备的滚动动画库。不同的是 WOW.js 的动画只播放一次，而 scrollReveal.js 的动画可以播放一次或无限次；
+
+    2.scrollReveal特点:
+    2.1 同时兼容PC端和移动端
+    2.2 0依赖（不依赖于jQuery，也不依赖于animate.css）
+    2.3 定制性高，使用简单方便快捷
+    2.4 和animte.css, WoW一样, 不支持低版本浏览器(IE10+)
+
+    3.使用步骤:
+    1.引入框架
+    2.搭建结构体
+    3.创建ScrollReveal对象
+    4.调用ScrollReveal对象的reveal方法, 将需要执行动画的元素给它
+     */
+    /*
+    4.scrollReveal配置
+    reset	    boolean	true / false元素是否在容器边界内来回滚动时都产生动画效果
+    duration	number	500	动画持续时间，单位毫秒
+    delay	    number	0	动画的延迟时间，单位毫秒
+    rotate	    object/number	{ x: 0, y: 0, z: 0 }	开始的角度，单位degrees
+    opacity	    number	0	开始的透明度
+    scale	    number	0.9	开始的缩放值
+    distance	string	可用任何CSS单位值，如：’20px’,’10vw’,’5%’	动画的距离
+    origin	    string	‘top’,’right’,’bottom’,’left’	动画的方向
+    easing	    string	‘ease’ ‘ease-out’‘ease-in-out’‘ease-in-out’	动画的easing效果，可以是任何有效的CSS easing值
+
+    5.scrollReveal事件
+    beforeReveal    动画开始之前的回调
+    afterReveal     动画结束时放的回调
+    beforeReset     动画开始被重置
+    afterReset      动画重置结束
+    什么是动画重置?
+    执行动画的元素离开屏幕之后就会被重置
+    重置就是重新设置为动画开始之前的默认样式
+    * */
+    let sr = ScrollReveal({
+        reset: true,
+        duration: 5000,
+        // delay: 5000,
+        rotate: {x: 0, y: 0, z: 45},
+        opacity: 0.5,
+        scale: 2,
+        distance: "500px",
+        origin: "left",
+        easing: "ease-in-out",
+        beforeReveal: function (ele) {
+            // 动画开始之前的回调
+            // console.log("动画开始之前", ele);
+        },
+        afterReveal: function (ele) {
+            // 动画结束之后的回调
+            // console.log("动画结束之后", ele);
+        },
+        beforeReset: function (ele) {
+            // 动画元素被重置之前的回到
+            // console.log("动画元素被重置", ele);
+        },
+        afterReset: function (ele) {
+            // 动画元素被重置之后的回到
+            console.log("动画元素被重置", ele);
+        },
+    });
+    sr.reveal('div');
+</script>
+</body>
+</html>

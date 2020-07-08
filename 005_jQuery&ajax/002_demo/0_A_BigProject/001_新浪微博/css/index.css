@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html,body{
+    height: 100%;
+}
+
+body{
+    background: url("./../images/body_bg.jpg") no-repeat center 0;
+}
+
+.nav{
+    width: 100%;
+    height: 80px;
+}
+
+.nav>img{
+    /* img不设置宽高会超出父元素边界，我认为图片和文字内容是一致的，超出部分都会从底部露出来 */
+    width: 100%;
+    height: 100%;
+}
+
+.content{
+    width: 1000px;
+    height: auto;
+    background: greenyellow;
+    margin: 80px auto 0 auto;
+    overflow: hidden;
+}
+
+.content>.left{
+    float: left;
+    width: 150px;
+}
+
+.content>.right{
+    float: right;
+    width: 240px;
+}
+
+.content>.center{
+    float: left;
+    background: deeppink;
+    width: 600px;
+    background: url("../images/comment.png") no-repeat 0 0;
+    /* 若不设置背景大小，图片会显得很大，看不全 */
+    background-size: 600px 168px;
+}
+
+.content>.center>.comment{
+    width: 571px;
+    height: 75px;
+    margin-top: 43px;
+    margin-left: 14px;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+.content>.center>input[type="button"]{
+    display: inline-block;
+    width: 82px;
+    height: 30px;
+    /*
+        margin-bottom: 3px;
+        这里不能使用margin-bottom，不管是top还是bottom，其作用都是把元素向下挤，只不过top是把自个往下挤，而bottom是把底下其他元素往下挤
+        对于margin-left和margin-right也一样，其二者都是将元素往右挤，只不过margin-left是把自个往右挤，而margin-right是把右边别个元素往右挤
+        所以要使用margin来移动本元素，需要使用margin-top和margin-left
+    */
+    margin-top: 3px;
+    /* 这里不能使用margin-right，因为按钮一开始就是在左边的，它初始的右外边距远远大于你将要给他设置的右外边距，所以设置无效 */
+    margin-left: 507px;
+    background: orange;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.center>.messageList{
+    margin-top: 12px;
+    width: 600px;
+    background: white;
+    border-radius: 5px;
+}
+
+.messageList>.info{
+    padding: 10px 20px;
+    border-bottom: 2px solid #cccccc;
+}
+
+.info>.infoText{
+    line-height: 25px;
+}
+
+.infoOperation{
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.info>.infoOperation>.infoTime{
+    float: left;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.info>.infoOperation>.infoHandle{
+    float: right;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.infoHandle>a{
+    text-decoration: none;
+    color: #cccccc;
+    background: url("../images/icons.png") no-repeat 0 0;
+    /* 这里不能使用margin，因为现在是a元素内部的背景图和文字内容重叠了，为了让二者区分开，需要设置二者距离，通过padding修改内部的距离可以实现，而margin修改的是元素外边框的宽度，并不能实现背景和内容分离 */
+    padding-left: 20px;
+    margin-right: 5px;
+}
+
+.infoHandle>a:nth-child(2){
+    background-position: 0 -17px;
+}
+
+.infoHandle>a:nth-child(3){
+    background-position: 0 -34px;
+}
+
+.page{
+    width: 1000px;
+    height: 40px;
+    background: orchid;
+    margin: 0 auto;
+    text-align: right;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.page>a{
+    font-size: 20px;
+    line-height: 25px;
+    text-decoration: none;
+    color: #2b2b2b;
+    width: 25px;
+    height: 25px;
+    background: #cccccc;
+    text-align: center;
+
+    /* 特别注意啊，如果子元素是inline-block/inline, 那么给子元素设置margin-top时，即使父元素没有边框，也不会把父元素往下挤，至于为何，不知 */
+    display: inline-block;
+    margin-top: 8px;
+}

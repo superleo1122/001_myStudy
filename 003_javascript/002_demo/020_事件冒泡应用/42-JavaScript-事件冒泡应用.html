@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>42-JavaScript-事件冒泡应用</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            width: 300px;
+            margin: 100px auto;
+            border: 1px solid #000;
+        }
+        .selected{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li class="selected">我是第1个li</li>
+    <li>我是第2个li</li>
+    <li>我是第3个li</li>
+    <li>我是第4个li</li>
+    <li>我是第5个li</li>
+</ul>
+<script>
+    /*
+    在企业开发中使用最多的就是事件冒泡
+    默认情况下通过onXxx和attachEvent添加的事件也都是冒泡的事件
+    */
+    /*
+    let oItems = document.querySelectorAll("ul>li");
+    let currentItem = oItems[0];
+    for(let item of oItems){
+        item.onclick = change;
+    }
+    function change() {
+        currentItem.className = "";
+        this.className = "selected";
+        currentItem = this;
+    }
+
+     */
+
+    let oUl = document.querySelector("ul");
+    let oLi = document.querySelector(".selected");
+    oUl.onclick = function (event) {
+        event = event || window.event;
+        // console.log(event.target);
+        oLi.className = "";
+        let item = event.target;
+        item.className = "selected";
+        oLi = item;
+    }
+</script>
+</body>
+</html>

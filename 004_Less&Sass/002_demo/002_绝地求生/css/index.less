@@ -1,0 +1,374 @@
+@import "triangle";
+@import "ripple";
+
+@baseColor: #e69800;
+
+/**********************************/
+body{
+  font:12px/1.5 '\5FAE\8F6F\96C5\9ED1',tahoma,'\5b8b\4f53', sans-serif;
+  color: #666666;
+  a{
+    color: #666666;
+  }
+}
+
+/**********************************/
+
+.center(){
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.hCenter(){
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.vCenter(){
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/**********************************/
+
+.toolbar{
+  width: 100%;
+  height: 40px;
+  border-top: 1px solid #c9c9c9;
+  border-bottom: 1px solid #c9c9c9;
+  background: #FFFFFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1999;
+
+  .toolbar-in{
+    width: 970px;
+    height: 100%;
+    margin: 0 auto;
+    li{
+      &:nth-child(1){
+        width: 220px;
+        height: 40px;
+        background: url("../images/icons-top.png") no-repeat 0 -40px;
+        position: relative;
+        z-index: 999;
+        a{
+          width: 100%;
+          height: 100%;
+          display: inline-block;
+        }
+      }
+
+      &:nth-child(2){
+        width: 230px;
+        height: 40px;
+        position: relative;
+        .big-image{
+          position: absolute;
+          left: -220px;
+          top: 0;
+          display: none;
+        }
+        &:hover{
+          .big-image{
+            display: inline-block;
+          }
+        }
+      }
+
+      &:nth-child(3){
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        margin-left: 20px;
+        a{
+          i{
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            background: url("../images/icons-top.png") no-repeat  -150px -134px;
+            vertical-align: middle;
+            margin-left: 5px;
+          }
+        }
+
+      }
+
+      &:nth-child(4){
+        height: 40px;
+        line-height: 40px;
+        i{
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          background: url("../images/platform-logo.png") no-repeat;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+.nav{
+  width: 100%;
+  height: 88px;
+  background: url("./../images/bg_top.png");
+  position: fixed;
+  left: 0;
+  top: 42px;
+  z-index: 999;
+
+  .nav-in{
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+
+    h1{
+      height: 100%;
+      a{
+        display: inline-block;
+        height: 100%;
+        line-height: 88px;
+        img{
+          width: 129px;
+          vertical-align: middle;
+        }
+      }
+    }
+
+    ul{
+      list-style: none;
+      height: 100%;
+      li{
+        float: left;
+        height: 100%;
+        width: 105px;
+        text-align: center;
+        color: #cccccc;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 88px;
+        a{
+          &:hover{
+          color: orangered;}
+        }
+
+        &:nth-child(3){
+          a{
+            color: orangered;
+          }
+        }
+        &:nth-child(4){
+          a{
+            color: orangered;
+          }
+        }
+      }
+    }
+
+    .enter-btn{
+      width: 140px;
+      height: 40px;
+      background: orangered;
+      text-align: center;
+      line-height: 40px;
+      margin-top: 20px;
+      a{
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.section-one{
+  background: url("./../images/bg_section1.jpg") no-repeat center center;
+  background-size: cover;
+  //position: relative;  // 因为fullpage本身就使用了定位属性，所以这里不必再使用定位属性来达成子绝父相
+
+  video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .play{
+    width: 81px;
+    height: 81px;
+    .center();
+    background: url("./../images/icons.png") no-repeat 0 0;
+    a{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  img{
+    .hCenter();
+    bottom: 20px;
+  }
+}
+
+.section-two{
+  background: url("./../images/bg_section2.jpg") no-repeat center center;
+  background-size: cover;
+
+  .video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .content{
+    width: 535px;
+    height: 205px;
+    .center();
+    background: url("./../images/icons.png") no-repeat -249px -214px;
+
+    p{
+      position: absolute;
+      bottom: -25px;
+      left: 32px;
+      color: #FFFFFF;
+    }
+
+    .ripple{
+      position: absolute;
+      left: 332px;
+      bottom: -80px;
+    }
+  }
+}
+
+.section-three{
+  background: url("./../images/bg_section3.jpg") no-repeat center center;
+  background-size: cover;
+
+  .video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info{
+    width: 535px;
+    height: 205px;
+    .center();
+    background: url("./../images/icons.png") no-repeat -249px -214px;
+
+    p{
+      position: absolute;
+      bottom: -25px;
+      left: 32px;
+      color: #FFFFFF;
+    }
+
+    .ripple{
+      position: absolute;
+      left: 332px;
+      bottom: -80px;
+    }
+  }
+}
+
+/* 自定义菜单 */
+#myMenu{
+  background: url("./../images/menu.png") no-repeat 0 0;
+  width: 31px;
+  height: 700px;
+  position: fixed;
+  left: 2%;
+  top: 20%;
+  z-index: 999;
+  display: none;
+
+  li{
+    position: absolute;
+    left: 31px;
+    width: 20px;
+    height: 50px;
+    overflow: hidden;
+    transition: all 0.3s linear 0s;
+    a{
+      line-height: 50px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      i{
+        .triangle(Right, 6px, @baseColor);
+        margin-left: 15px;
+      }
+      div{
+        width: 165px;
+        height: 50px;
+        background: url("./../images/icons.png") no-repeat -115px 0px;
+        line-height: 30px;
+        padding-left: 15px;
+        box-sizing: border-box;
+        white-space: nowrap;
+        font-size: 18px;
+        color: #fff;
+      }
+    }
+    &:nth-child(2){
+      top: 20px;
+    }
+    &:nth-child(3){
+      top: 175px;
+      div{
+        background-position: -285px 0px;
+      }
+    }
+    &:nth-child(4){
+      top: 330px;
+      div{
+        background-position: -455px 0px;
+      }
+    }
+    &:nth-child(5){
+      top: 480px;
+      div{
+        background-position: -625px 0px;
+      }
+    }
+    &:nth-child(6){
+      top: 635px;
+      div{
+        background-position: -795px 0px;
+      }
+    }
+    &.active{
+      width: 215px;
+      a{
+        color: @baseColor;
+      }
+    }
+    &:hover{
+      width: 215px;
+      a{
+        color: @baseColor;
+      }
+    }
+  }
+  .menu-up, .menu-down{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 0;
+    display: block;
+  }
+  .menu-up{
+    top: 0;
+  }
+  .menu-down{
+    bottom: 0;
+  }
+}
+

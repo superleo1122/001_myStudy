@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div{
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<script>
+    /**
+     *  1. 在原生JS中专门为移动端新增了几个事件
+     *      touchstart: 手指按下
+     *      touchmove: 手指在元素中移动
+     *      touchend: 手指抬起
+     *
+     *  注意：这几个事件只支持移动端，不支持PC端
+     */
+
+    let oDiv = document.querySelector("div");
+    oDiv.ontouchstart = function () {
+        console.log("手指按下");
+    };
+    oDiv.ontouchmove = function () {
+        console.log("手指移动");
+    };
+    oDiv.ontouchend = function () {
+        console.log("手指抬起");
+    };
+
+    /*******************************************************************/
+
+    /**
+     *  2. Touch事件对象
+     *      移动端的touch事件被触发时系统也会自动传递一个事件对象给我们
+     *
+     *  3. 移动端touch事件对象比较重要的三个子对象
+     *      3.1 touches: 当前屏幕上所有手指的列表
+     *      3.2 targetTouches: 保存了元素上所有的手指列表
+     *      3.3 changedTouches: 当前屏幕上刚刚接触的手指或离开的手指
+     *
+     *      touches和targetTouches
+     *          若手指都按在了同一个元素上，那么这两个对象中保存的内容是一样的
+     *          若手指按在了不同的元素上，那么这两个对象中保存的内容是不一样的
+     *          touches保存的是所有元素中的手指，而targetTouches保存的是当前元素中的手指
+     *
+     *      changedTouches
+     *          在ontouchstart中保存的是刚刚新增的手指
+     *          在ontouchend中保存的是刚刚离开的手指
+     */
+    oDiv.ontouchstart = function (event) {
+        console.log(event.touches);
+        console.log(event.targetTouches);
+        console.log(event.changedTouches);
+    };
+
+    /************************************************************************/
+
+    /**
+     *  4. Touch事件位置
+     *      4.1 手指位置
+     *      4.2 screenX/screenY是相对于屏幕左上角的偏移位
+     *      4.3 clientX/clientY是相对于可视区域左上角的偏移位
+     *      4.4 pageX/pageY是相对于内容左上角的偏移位
+     */
+    oDiv.ontouchstart = function (event) {
+        // console.log(event.targetTouches[0]);
+        // console.log(event.targetTouches[0].screenX);
+        // console.log(event.targetTouches[0].screenY);
+        console.log(event.targetTouches[0].clientX); // 11
+        console.log(event.targetTouches[0].clientY); // 63
+        console.log(event.targetTouches[0].pageX);  // 686
+        console.log(event.targetTouches[0].pageY);  // 63
+    }
+</script>
+</body>
+</html>

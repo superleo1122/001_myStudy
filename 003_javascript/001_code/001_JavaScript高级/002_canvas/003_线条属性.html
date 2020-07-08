@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas{
+            background: greenyellow;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+<script>
+    /**
+     *  线条相关属性
+     *      1. lineWidth : 线条宽度
+     *      2. strokeStyle : 线条颜色
+     *      3. lineCap : 线末端类型 butt(默认) round square
+     */
+    let oCanvas = document.querySelector("canvas");
+    // 获取绘图工具
+    let oCtx = oCanvas.getContext("2d");
+    // 修改线条高度
+    oCtx.lineWidth = 20;
+    // 修改线条颜色
+    oCtx.strokeStyle = "red";
+    // 修改线末端类型
+    oCtx.lineCap = "round";
+    oCtx.moveTo(50,50.5);
+    oCtx.lineTo(100,100.5);
+    oCtx.stroke();
+</script>
+</body>
+</html>

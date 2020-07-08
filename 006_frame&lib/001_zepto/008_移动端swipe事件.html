@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin-left: 100px;
+            margin-top: 100px;
+        }
+    </style>
+    <script src="js/zepto.js"></script>
+    <script src="js/event.js"></script>
+    <script src="js/touch.js"></script>
+    <script src="js/fx.js"></script>
+</head>
+<body>
+<div></div>
+<script>
+    /**
+        1.什么是轻扫事件?
+        手指快速的往左边滑动/或者右边滑动/或者上边滑动/或者下边滑动
+    */
+    // $("div").swipe(function () {
+    //     console.log("轻扫");
+    // });
+    $("div").swipeLeft(function () {
+        // console.log("向左边轻扫");
+        $(this).animate({marginLeft: "0"}, 2000);
+    });
+    $("div").swipeRight(function () {
+        // console.log("向右边轻扫");
+        $(this).animate({marginLeft: "100px"}, 2000);
+    });
+    $("div").swipeUp(function () {
+        // console.log("向上边轻扫");
+        $(this).animate({marginTop: "0"}, 2000);
+    });
+    $("div").swipeDown(function () {
+        // console.log("向下边轻扫");
+        $(this).animate({marginTop: "100px"}, 2000);
+    });
+</script>
+</body>
+</html>

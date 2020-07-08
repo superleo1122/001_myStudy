@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="001_js/myAjax3.js"></script>
+    <script>
+        window.onload = function () {
+            var oBtn = document.querySelector("button");
+            oBtn.onclick = function () {
+                ajax({
+                    type: "get",
+                    url: "../001_php/007_ajax-xml.php",
+                    success: function (xhr) {
+                        console.log(xhr.responseText);
+                        console.log(xhr.responseXML); // xml文件用responseXML来接收，responseXML是一个document对象，可以把它当作document对象来操作
+                        let res = xhr.responseXML;
+                        let element = res.querySelector("name");
+                        console.log(element);
+                        console.log(element.innerHTML);
+                        console.log(document); // 这个是系统的document对象
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.status);
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+<button>发送ajax</button>
+</body>
+</html>

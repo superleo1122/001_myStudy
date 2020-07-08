@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/echarts.js"></script>
+</head>
+<body>
+<!--
+    1. 为ECharts准备一个容器
+-->
+<div style="width: 600px; height:400px"></div>
+</body>
+<script>
+    /* 2.拿到准备好的容器 */
+    let oDiv = document.querySelector("div");
+    /* 3.创建一个ECharts对象 */
+    let myCharts = echarts.init(oDiv);
+    /* 4.对ECharts进行一些配置 */
+    let option = {
+        // 设置图表的标题
+        title: {
+            text: "my echarts"
+        },
+        // 设置图表的图例
+        legend:{
+            data:['销量','产量']
+        },
+        // 设置X轴上显示的数据
+        xAxis: {
+            data: ["火龙果","草莓","橘子","葡萄","柚子","芒果"]
+        },
+        // 设置Y轴上显示的数据, 若没有设置会根据数据自动填充
+        yAxis:{},
+        // 设置图表的数据
+        series:[{
+            name:"销量",
+            type:"bar",
+            data:[5,34,66,3,10,55]
+        },{
+            name: '产量',
+            type: 'bar',
+            data: [50, 120, 136, 60, 40, 80]
+        }]
+    };
+    /* 5.将配置传递给ECharts */
+    myCharts.setOption(option);
+</script>
+</html>

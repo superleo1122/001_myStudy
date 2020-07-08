@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="001_js/myAjax3.js"></script>
+    <script>
+        window.onload = function () {
+            var oBtn = document.querySelector("button");
+            oBtn.onclick = function () {
+                ajax({
+                    type: "get",
+                    url: "../001_php/008_ajax-json.php",
+                    success: function (xhr) {
+                        console.log(xhr.responseText);
+                        let res = xhr.responseText;
+                        /*
+                            在低版本IE中，不可以使用原生的JSON.parse方法，但可以使用json2.js这个框架来兼容
+                         */
+                        let oRes = JSON.parse(res);
+                        console.log(oRes);
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.status);
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+<button>发送ajax</button>
+</body>
+</html>

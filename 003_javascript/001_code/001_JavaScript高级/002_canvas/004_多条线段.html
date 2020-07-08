@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas{
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+</body>
+<script>
+
+    /**
+     *  1. 多根线条注意点
+     *      若是同一个路径，那么路径样式会被重用(第二次绘制会复用第一次的样式)
+     *      若是同一个路径，那么后设置的路径样式会覆盖先设置的路径样式
+     *
+     *  2. 为了给每根线条单独设置路径样式，需要开启一个新的路径
+     */
+
+    let oCanvas = document.querySelector("canvas");
+    let oCtx = oCanvas.getContext("2d");
+    oCtx.moveTo(50,50.5);
+    oCtx.lineTo(100,50.5);
+    oCtx.strokeStyle = "red";
+    oCtx.stroke();
+
+    oCtx.beginPath();  // 开启一个新的路径
+    oCtx.moveTo(50,100.5);
+    oCtx.lineTo(100,100.5);
+    oCtx.lineWidth = 20;
+    oCtx.stroke();
+</script>
+</html>

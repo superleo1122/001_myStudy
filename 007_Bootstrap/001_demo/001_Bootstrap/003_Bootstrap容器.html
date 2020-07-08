@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--为了保证在移动端能够正常的显示-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- 导入Bootstrap的CSS文件 -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            height: 300px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container"></div>
+<!--
+    1.Bootstrap容器
+    1.1在Bootstrap中容器是响应式布局的基础, Bootstrap推荐将所有内容都定义在容器之中
+    1.2并且容器是启用Bootstrap栅格系统必不可少的前置条件
+
+    2. Bootstrap中提供了两个容器: container/container-fluid
+    2.1container容器(固定容器):
+    只要给标签添加了container类名, 这个标签就变成了Bootstrap的container容器
+    只要这个标签变成了Bootstrap的container容器, 在不同视口大小下就会有不同的固定宽度
+
+    2.2container-fluid(自适应宽度容器)
+    只要给标签添加了container-fluid类名, 这个标签就变成了Bootstrap的container-fluid容器
+    只要这个标签变成了Bootstrap的container-fluid容器, 那么容器的宽度永远都是100%自适应
+
+    3.Bootstrap对视口划分
+    Bootstrap4将视口划分为了5钟
+    超小屏幕(xs): <576px
+    小屏幕(sm): >=576px
+    中等屏幕(md):>=768
+    大屏幕(lg): >=992px
+    超大屏幕(xl): >= 1200px
+-->
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="js/jquery-3.1.1.js"></script>
+<!--在Bootstrap4中很多的提示/弹窗都是通过popper.min.js实现的, 所以需要导入-->
+<script src="js/popper.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="js/bootstrap.js"></script>
+</body>
+</html>

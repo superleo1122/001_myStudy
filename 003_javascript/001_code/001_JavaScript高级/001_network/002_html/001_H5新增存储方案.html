@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+            Cookie SessionStorage LocalStorage区别
+                1. 生命周期(同一浏览器下)
+                    Cookie: 默认是关闭浏览器后失效，但可以设置过期时间
+                    SessionStorage: 仅在当前会话窗口下有效，关闭窗口或浏览器后被清除，不能设置过期时间
+                    LocalStorage: 除非被清除，否则永久保存
+
+                2. 容量
+                    Cookie: 有大小和个数限制(4kb左右和20~50个)
+                    SessionStorage: 有大小限制，5M左右
+                    LocalStorage: 有大小限制，5M左右
+
+                3. 网络请求
+                    Cookie: 每次都会携带在HTTP请求头中，如果使用cookie保存过多数据会带来性能问题
+                    SessionStorage: 仅在浏览器中保存，不参与和服务器的通信
+                    LocalStorage: 仅在浏览器中保存，不参与和服务器的通信
+
+                4. 应用场景
+                    Cookie: 判断用户是否登录
+                    SessionStorage: 表单数据
+                    LocalStorage: 购物车
+         */
+
+
+        /**
+         *  SessionStorage
+         */
+            // 设置
+        sessionStorage.setItem("name","superleo");
+        sessionStorage.setItem("age",10);
+            // 删除
+        sessionStorage.removeItem("age");
+            // 修改
+        sessionStorage.setItem("name","lisi");
+            // 获取
+        let item = sessionStorage.getItem("name");
+        console.log(item);
+            // 清空SessionStorage中的所有数据
+        sessionStorage.clear();
+
+        /**
+         *  LocalStorage
+         */
+        localStorage.setItem("name","xue");
+        localStorage.setItem("color","red");
+        localStorage.removeItem("color");
+        localStorage.getItem("name");
+        // 清空所有localStorage数据
+        localStorage.clear();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

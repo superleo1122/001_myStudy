@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            text-align: center;
+            font-size: 40px;
+        }
+        .click{
+            width: 300px;
+            height: 300px;
+            background: red;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 100px;
+        }
+        .tap{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 150px;
+        }
+    </style>
+    <script src="js/zepto.js"></script>
+    <script src="js/touch.js"></script>
+    <script src="js/fastclick.js"></script>
+</head>
+<body>
+<div class="click">click</div>
+<div class="tap">tap</div>
+<!--
+    这两个元素不是父子关系，是兄弟关系
+-->
+<script>
+    /**
+     *  1.移动端点透问题
+     *      当一个元素覆盖了另一个元素，覆盖的元素监听touch事件，而下面的元素监听click事件，并且touch事件出发后覆盖的元素消失，那么会出现点透问题
+     *      对应这里的情形就是，当点击 .tap 时， .tap 的touch事件触发， .click 的click事件也触发，正常情况是只有 .tap 事件触发，
+     *      而 .click 的事件触发
+     *
+     *  2.移动端点透问题原因
+     *      2.1 当手指触摸屏幕时，系统生成两个事件，一个是touch，一个是click
+     *      2.2 touch事件先执行，执行完后从文档上消失
+     *      2.3 click事件有100~300ms延迟，所以后执行
+     *      2.4 但click事件执行时触发的元素已经消失了，对应的问题现在是下面的元素，所以就触发了下面元素的click事件
+     *
+     *  3. 解决办法
+     *      3.1 在touch事件中添加 event.preventDefault() 阻止事件扩散
+     *      3.2 使用Zepto的tap事件，但需要注意老版本的Zepto也会出现点透问题
+     *      3.3 使用Fastclick插件，这是最早解决点透问题的插件
+     */
+
+    let oClick = document.querySelector(".click");
+    let oTap = document.querySelector(".tap");
+    oClick.onclick = function (event) {
+        console.log("click");
+    }
+    /******************************************************************/
+    // 解决方式一
+    oTap.ontouchstart = function (event) {
+        oTap.style.display = "none";
+        event.preventDefault(); // 阻止事件扩散
+        console.log("tap");
+    };
+    /******************************************************************/
+    // 解决方式二
+    $(oTap).tap = function () {
+        oTap.style.display = "none";
+    }
+    /******************************************************************/
+    // 解决方式三
+    if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function() {
+            FastClick.attach(document.body);
+        }, false);
+    }
+    // 注意点: 这里的click事件并不是原生的click事件, 是使用的fastclick中的click
+    //         这里的click事件已经解决了100~300ms延迟的问题
+    oTap.addEventListener("click", function () {
+        oTap.style.display = "none";
+    });
+    /*************************************************************************/
+</script>
+</body>
+</html>
