@@ -10,10 +10,23 @@
     </style>
 </head>
 <body>
-<svg width="500" height="300">
+<svg width="500" height="500">
     <!-- 路径绘制 -->
     <path d="M 10 10 L 30 30 l 50 10" stroke="blue" fill="none"></path>
-
+    <!-- 圆弧 -->
+    <path d="M 50 100 A 50 50 90 1 1 100 250" stroke="red" fill="none"></path>
+    <!-- 文本绘制 -->
+    <text>
+        <tspan x="150" y="30" fill="red">who</tspan>
+        <tspan x="150" y="50" fill="green">what</tspan>
+        <tspan x="150" y="70" fill="yellow">where</tspan>
+    </text>
+    <!-- 超链接 -->
+    <a xlink:href="http://cn.bing.com" xlink:title="Bing" target="_blank">
+        <text x="250" y="50" fill="blue">click me</text>
+    </a>
+    <!-- 绘制图片 -->
+    <image xlink:href="images/leo.jpg" x="350" y="50"></image>
 </svg>
 </body>
 </html>
