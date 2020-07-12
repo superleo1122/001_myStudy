@@ -1,0 +1,11 @@
+/* components/Tabs/Tabs.wxss */
+.tabs .tabs-title {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  line-height: 80rpx;
+}
+.tabs .tabs-title .active {
+  color: palevioletred;
+  border-bottom: 4rpx solid palevioletred;
+}

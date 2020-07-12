@@ -1,0 +1,17 @@
+{
+  "name": "leoChat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint -c .eslintrc ./"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-ft-app": "^1.0.2",
+    "eslint-plugin-import": "^2.13.0"
+  }
+}
