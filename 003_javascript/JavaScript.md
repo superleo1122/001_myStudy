@@ -383,7 +383,7 @@
        obj.name = "leo";
        obj.say = function(){}
        ```
-    
+   
      + 通过｛｝法
 
      + ```js
@@ -848,6 +848,10 @@
      + 在低级版本的浏览器中, 需要通过window.event来获取事件对象
    + 获取事件对象的兼容性写法
      + `event = event || window.event;`
+   + 事件对象属性
+     + currentTarget和target
+       + currentTarget：事件沿着DOM元素触发时事件的当前目标，它总是指向事件绑定的元素。因为事件触发时，必然要找到处理它的事件处理程序。
+       + target：触发事件对象的引用，它总是指向事件触发的元素。此属性可以用来实现事件委托
 
 5. 阻止事件的默认行为三种方法
 
