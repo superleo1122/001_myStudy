@@ -4,10 +4,18 @@
 
 ### 1. Git配置
 
-1. git init : 初始化版本库
-2. git config user.name "姓名"
-3. git config user.email "邮箱"
-4. git config -l : 查看设置情况
+#### 1. 全局配置
+
+1. git config --global user.name "yourName"
+2. git config --global user.email "yourEmail"
+
+#### 2.局部配置
+
+1. 局部配置可以认为是项目配置
+2. git init : 初始化版本库
+3. git config user.name "姓名"
+4. git config user.email "邮箱"
+5. git config -l : 查看设置情况
 
 ### 2. 项目使用
 
