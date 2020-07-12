@@ -1,0 +1,2 @@
+<!--pages/z-test/test.wxml-->
+<Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange"></Tabs>
