@@ -3,7 +3,7 @@ Component({
     /**
    * 组件的属性列表
    */
-    properties: {
+    properties: { 
         tabList: {
             type: Array,
             value: ['sport', 'food', 'gold']
