@@ -1,0 +1,13 @@
+/* components/Tabs/tabs-1/tabs-1.wxss */
+.tab {
+  padding: 0 40rpx;
+  color: #8c8c8c;
+  font-family: PingFang SC;
+  background-color: greenyellow;
+}
+.tab-title {
+  height: 76rpx;
+}
+.tab-title .title-item {
+  display: inline-block;
+}
