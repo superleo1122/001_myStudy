@@ -1,0 +1,11 @@
+<!--components/Tabs/tabs-1/tabs-1.wxml-->
+<view class="tab">
+    <scroll-view scroll-x="true" class="tab-title">
+        <view wx:for="{{tabList}}" wx:key="index" class="title-item" data-index="index" bindtap="handleItemTap">
+            {{item}}
+        </view>
+    </scroll-view>
+    <view>
+        <slot></slot>
+    </view>
+</view>
