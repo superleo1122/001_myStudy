@@ -158,3 +158,57 @@
 5. 函数的可选参数
 6. 函数的默认参数
 7. 函数的剩余参数
+
+## 六.泛型
+
+1. 泛型使用
+
+   + ```typescript
+     let test = <T>(name:T):T[]{
+         return [name]
+     }
+     let res = test<string>('leo');
+     let res1 = test('neo');  // 没有指定会根据传递的参数自动推导
+     ```
+
+2. 泛型约束
+
+   + ```typescript
+     interface LengthInterface{
+         length:number
+     }
+     // T继承了这个接口，意味着我们传入的类型必须有length属性
+     let getArray = <T extends LengthInterface>(value:T,items:number=5)=>{
+         return new Array(items).fill(value);
+     }  
+     let arr = getArray<string>('leo');
+     ```
+
+3. 在泛型约束中使用类型参数
+
+   + 一个泛型被另一个泛型约束
+
+   + ```typescript
+     let getProps = <T,K extends keyof T>(obj:T, key:K):any=>{
+         return obj[key];
+     }
+     ```
+
+## 七.类
+
+1. TS中类和ES6区别，需要先定义实例属性，才能使用实例属性
+2. 类属性修饰符
+   + public	// 默认值
+   + protected
+   + private
+   + readonly
+3. 类方法修饰符
+   + public	// 默认值
+   + protected
+   + private
+4. 类可选属性
+5. 类参数属性
+6. 存取器
+   + 通过getters/setters来截取对象成员的访问
+7. 抽象类
+
