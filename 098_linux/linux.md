@@ -25,6 +25,9 @@
    + tab : 用于补全
    + ctrl + c :  中止程序
    + ctrl + d :  退出，相当于quit
+2. 帮助命令
+   + man    //  查询命令或文件的相关用法
+   + man date
 
 ## 三.命令
 
@@ -38,19 +41,19 @@
 2. mkdir
    + 创建目录
    + mkdir [-p] dirName
-     + -p  父目录不存在情况下先生成父目录
-3. cd
+     + -p  父目录不存在情况下先生成父目录，例如 `mkdir -P ./test/child`
+3. rmdir
+   + 删除目录
+   + rmdir dirname
+4. cd
    + 切换目录
    + cd dirName
-4. touch
+5. touch
    + 生成一个空文件
-5. echo
+6. echo
    + 生成一个带内容文件
    + echo content > fileName  创建并写入内容到指定文件
    + echo content >> fileName  将内容追加到指定文件，若文件不存在会自动创建
-6. cat
-   + 显示文本文件内容
-   + cat [options...] [--help] [--version] fileName
 7. cp
    + 复制文件或目录
    + cp [options] source dest
@@ -60,7 +63,7 @@
      + -f  强制删除文件或目录
      + -r  删除该目录下的所有文件，递归删除
 9. mv
-   + 移动文件或目录
+   + 移动文件或目录，也可以用来重命名
    + mv [options...] source dest
 10. find
     + 在文件系统中查找指定的文件
@@ -73,16 +76,41 @@
     + 显示当前目录的完整路径
 14. ln
     + 建立软链接
-15. more
-    + 分页显示文本文件内容
-16. head
-    + 显示文件开头内容
-17. tail
-    + 显示文件结尾内容
-    + tail [options] fileName
-      + -f  跟踪输出
 
-### 2.系统管理命令
+### 2.文件内容查阅
+
+1. cat  // 由第一行内容开始查阅
+   + cat leo.txt
+   + cat -n leo.txt   // 列出行号
+2. tac  // 倒序查阅，cat的反写
+3. more  // 分页显示
+   + more leo.txt
+     + 空格键：向下翻页
+     + b：往回翻页，只对文件有效，对管道无效、
+     + enter：向下滚动一行
+     + /关键字：在当前显示的内容中，向下查询关键字，按n可查看一个个查找值
+     + :f  : 显示当前行数
+     + q：退出
+4. less  // 分页显示
+   + less leo.txt
+     + 空格键：向下翻页
+     + PageDown：向下翻页
+     + PageUp：向上翻页
+     + /关键字：查询
+     + n：重复前一个查询
+     + N：反向重复前一个查询
+     + q：退出
+5. head  // 在头部抽取数据显示
+   + head leo.txt  // 默认显示前10行
+   + head -n 20 leo.txt  // 显示前20行
+   + head -n -100 leo.txt  // 假设leo.txt有151行，则此命令意思为显示前51行，可以认为是151-100
+6. tail  // 在尾部抽取数据显示
+   + tail -n 20 leo.txt  // 显示后20行
+   + tail -f leo.txt   // 持续显示尾部内容
+   + tail -200f leo.txt  // 持续显示后200行内容
+   + head -n 20 leo.txt | tail -n 10    // 显示第11行到20行内容
+
+### 3.系统管理命令
 
 1. stat
    + 显示指定文件的相关信息,比ls命令显示内容更多
@@ -230,11 +258,16 @@
        + 文件类型：d 表示目录，l 表示软链接，- 表示文件
        + 文件权限三个字符为一组，r 只读，w 可写，x 可执行，- 表示无此权限，第一组为当前用户权限，第二组为用户组权限，第三组为其他用户权限
        + 连接数，指有多少个文件指向同一个索引节点
-2. chown  : 更改所有者 chang owner
+2. chown  : 更改文件所有者 chang owner
    + 更改文件所属用户及所属组
-     + chown -r 用户名称 文件或者目录    // 更改文件所属用户，-r 为递归更改，表示将目录下所有文件及文件夹进行变更
-     + chown -r 用户名称 用户组名称 文件或目录  // 更改用户及用户组
-3. chmod ：更改操作权限
+     + chown -R 用户名称 文件或者目录    // 更改文件所属用户，-R 为递归更改，表示将目录下所有文件及文件夹进行变更
+       + `chown -R superleo foldName`  
+     + chown -R 用户名称:用户组名称 文件或目录  // 更改用户及用户组
+       + `chown -R superleo:leo foldNameq`
+3. chgrp :  改变文件所属组
+   + chgrp leo test.log     // 将test.log文件添加到leo组
+   + chgrp -R leo test       //  递归遍历test文件夹并将其添加到leo组 n
+4. chmod ：更改文件权限
    + chmod [who] [ + 或者 - 或者 =] [mode] 文件名
      + who 表示操作对象，可以是下面的一个或者组合
        + u : 用户user
