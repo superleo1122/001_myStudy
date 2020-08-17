@@ -252,7 +252,8 @@
 
 ### 3.账户管理命令
 
-1. useradd
+1. ------------------------------------------------------------账户管理-----------------------------------------------------------------------------------------------------------
+2. useradd
    + 新增用户
    + **useradd username**  // 默认会创建一个与账户名同名的用户组，创建账户后还需要使用passwd命令设置密码才算完成账号注册
      + -u :  UID
@@ -261,19 +262,25 @@
      + -s :  shell
      + -d :  用户目录
      + -D ：查看useradd默认值
-2. userdel
+3. userdel
    + 删除用户
    + userdel username
      + -r  ：删除账号时同时删除目录
-3. 口令维护
+4. usermod
+   + 对账号信息进行微调
+5. 口令维护
    + **passwd 用户账户名**  // 设置用户口令
    + passwd -l 用户账户名  // 锁定用户账户
    + passwd -u 用户账户名  // 解锁用户账户
    + passwd -d 用户账户名  // 删除账户口令
-   + **gpasswd -a 用户账户名 组账户名**   // 将指定用户添加到指定组
-   + **gpasswd -d 用户账户名 组账户名**   // 将用户从指定组中删除
-   + gpasswd -A 用户账户名 组账户名   // 将用户指定为组的管理员
-4. 组账号维护
+6. 其他
+   + useradd,userdel,usermod,passwd都是管理员账号可以使用的命令
+   + 普通账户可使用命令
+     + chsh    // change shell
+       + chsh -l    // 列出可用shell
+       + chsh -s /bin/zsh    // 设置此账户的shell
+7. ----------------------------------------------------------------------------------组管理-----------------------------------------------------------------------------------------
+8. 组账号维护
    + groupadd  组账户名    // 创建新组
      + -g  :  指定组GID
    + groupmod
@@ -282,11 +289,67 @@
      + -n :  修改组账户名
    + groupdel
      + groupdel 组账号名  // 删除指定组账号
-5. 用户和组状态
-   + **su 用户名**  // 切换用户账户
+   + gpasswd
+     + **gpasswd -a 用户账户名 组账户名**   // 将指定用户添加到指定组
+     + **gpasswd -d 用户账户名 组账户名**   // 将用户从指定组中删除
+     + gpasswd -A 用户账户名 组账户名   // 将用户指定为组的管理员
+9. 用户和组状态
    + id  用户名  // 显示用户的UID，GID
    + whoami   //  显示当前用户名称
    + **groups**   // 显示用户所属组
+
+### 4.ACL权限管理
+
+### 5.用户身份切换
+
++ su
+
+  + 参数
+    + -l  ：以login-shell方式切换账户
+    + -c ：仅进行一次命令，类似于sudo
+  + 注
+    + Linux中切换账号方式有两种
+      1. login-shell   //  登陆方式切换会将环境变量也进行切换
+      2. nologin-shell  //  非登陆方式切换不会将环境变量进行切换，还是使用原先账户的环境变量
+    + 退出su环境可以使用 `exit` 命令
+
+  + su    // 以非登陆方式切换到root账户，需要输入root账号密码
+  + su -    // 以登陆方式切换到root账户，需要输入root账号密码，推荐
+  + su username   // 以非登陆方式切换账户，root->普通账户，不需要密码，普通1->普通2，需要输入普通2密码
+  + su -l username  // 以登陆方式切换账户，root->普通账户，不需要密码，普通1->普通2，需要输入普通2密码，推荐
+
++ sudo
+
+  + 以root身份执行命令，仅需自己密码即可，仅有/etc/sudoers用户才能执行sudo命令
+
+  + visudo
+
+    + 用来编辑/etc/sudoers文件的专门命令
+
+    + visudo    // 执行后进入vim环境，可以对配置进行修改
+
+      1. 将用户添加进sudo：找到`root ALL=(ALL) ALL` ，在下面添加一个用户配置即可，参数可根据情况选择，ALL代表可执行所有命令
+
+      2. 配置用户组的sudo：添加`%groupName ALL=(ALL) ALL` , %表示这是一个用户组，新增完了，这个组的用户都能执行sudo命令
+
+      3. 为用户执行sudo命令时免除密码输入：添加 `%groupName ALL=(ALL) NOPASSWD:ALL` , 这个为组设置的，有没为单个用户设置的呢？
+
+      4. 不切换root账号转为root身份：
+
+         + ```shell
+           [root@~]visudo
+           User_Alias ADMINS = user1,user2,user3
+           ADMINS ALL=(root) /bin/su -
+           ```
+
+         + user1,user2,user3只要输入 `sudo su-` ，然后输入自己账号密码，则会立刻变为root身份
+
+### 6.用户信息
+
+1. 用户查询
+   + who    // 当前已登陆在系统上的用户
+   + last     //  所有登陆者信息
+   + lastlog   // 每个账号最后登陆信息
 
 ## 四.文件权限管理
 
@@ -487,12 +550,19 @@
   + 1>> 或 >> ：以累计的方法将正确的数据输出到指定的文件和设备上
   + 2> ：以覆盖的方法将错误的数据输出到指定的文件和设备上
   + 2>> ：以累加的方法将错误的数据输出到指定的文件和设备上
+  + 2>&1 ：把标准错误输出重定向到标准输出
+  + 1>&2 ：把标准输出重定向到标准错误
+  + &>filename ：把标准输出和标准错误都重定向到filename中
+  + &>>filename ：把标准输出和标准错误都重定向到filename中
 + 垃圾数据黑洞
   + /dev/null     // 可以将指定数据进行丢弃
   + find /home -name .bashrc 2>/dev/null    // 只有stdout会显示在屏幕上，stderr会被丢弃
+  + cat /dev/null > back.log    // 可以用来清空一个文件
 + 例子
   + find /home -name .bashrc > list_right 2> list_error     // 将正确数据和错误数据分别输出到不同文件
-  + find /home -name .bashrc > list 2>&1     /     find /home -name .bashrc &> list      // 将正确和错误数据写入到同一个文件，这两个方式都可以
+  + find /home -name .bashrc 1>> list_right 2>> list_error     // 将正确数据和错误数据分别输出到不同文件
+  + find /home -name .bashrc > list 2>&1  (推荐)   /     find /home -name .bashrc &> list      // 将正确和错误数据写入到同一个文件，这两个方式都可以
+  + find /home -name .bashrc >> list 2>&1  (推荐)   /     find /home -name .bashrc &>> list
 
 ### 3.逻辑判断 && ||
 
@@ -574,3 +644,125 @@
 ### 9.关于减号 -
 
 + 在使用管道命令时，stdin和stdout可以用 `-` 代替
+
+## 七.任务调度
+
+### 1.at
+
++ 仅执行一次
+
+### 2.crontab
+
++ 可以循环执行
++ 用户限制
+  + /etc/cron.allow  // 将可以使用crontab命令的账户写入其中，不在这个文件里的账户则不可以使用crontab
+  + /etc/cron.deny   // 将不可以使用crontab的账号写入其中，则未在这个文件中的账户就可以使用crontab
+  + 二者使用一个即可，allow比deny权限高
++ 使用crontab命令新建定时任务后，定时任务信息会被记录到`/var/spool/cron/`文件夹下，文件名以账号区分，注意不要使用vim直接编辑文件，否则可能会由于语法错误导致cron不能正常执行
++ 语法
+  + crontab [-u username] [-elr]
+    + -u ：只有root账户可以执行，此参数可用来管理其他账户的cron
+    + -l ：列出cron任务
+    + -e ：编辑cron任务
+    + -r ：删除当前用户的所有cron任务，若要删除某条cron任务，请使用 -e
+  + cron编辑
+    + cron表达式 cmd
+    + 0 0 1 1 * /home/script/test.sh
+
+## 八.程序管理
+
+### 1.job管理
+
+1. 后台工作状态：暂停 、运行中
+2. 命令
+   + & ：将&放到需要执行的命令最后可以将此job放到后台运行，若执行的命令会有stdout或stderr，那么应该重定向到文件中，否则会在屏幕上输出
+     + find / -name 'nohup.*' >> test.log 2>&1 &
+   + ctrl + z ：将目前工作丢到后台中暂停
+   + jobs [-lrs]
+     + -l ：列出所有job
+     + -r ：列出正在后台运行的job
+     + -s ：列出暂停的job
+   + fg ：将后台工作拿到前台处理
+     + fg num     // 取出工作号为num的job
+     + fg %num    // %可有可无
+   + bg ：将后台中暂停的工作变为run
+     + bg %num
+   + kill  ：管理后台当中的工作
+     + kill -signal %num 
+     + -1  // 重新读取一次参数的配置文件
+     + -9  // 强制中止工作，有些程序的临时文件可能不会自动删除
+     + -15  // 正常退出程序
+3. 脱机管理
+   + 远程连接linux，并且是通过&方式放到后台的，那么在断开连接后，放到后台的工作也会中止，要想脱机也能运行，那么需要使用nohup命令
+   + nohup  // 表示不挂断的运行命令
+     + nohup cmd    // 在前台不挂断工作
+     + nohup cmd &  // 在后台不挂断工作
+     + ex：nohup /home/script/test.sh & 
+     + 注：若cmd执行后有输出，且没指定输出到哪，那么nohup会默认输出到nohup.out
+
+### 2.进程管理
+
+1. 进程查看
+   + ps
+     + 参数：-A 所有进程；-a 不与terminal有关进程；-u 有效用户相关进程；-l 将PID信息详细列出
+     + ps aux    // 查看系统所有进程数据
+     + ps -l       // 仅列出与自己bash有关的进程
+     + ps -lA    // 查看系统所有数据
+   + pstree   // 以进程树方式查看
+     + 参数：-A : ascii码相关；-U utf8相关；-p 列出pid；-u 列出所属账号
+     + pstree
+     + pstree -A
+     + pstree -Aup     // 列出进程树，同时显示PID和user
+   + top
+     + 参数：-d num 进程界面更新秒数，默认5s；-p pid 监测指定pid进程
+     + top -d 2 -p 2242
+     + 在top界面可使用按键命令
+       1. ? ：显示可以在top界面按下的键
+       2. P ：根据CPU进行排序
+       3. M ：根据内存使用进行排序
+       4. N ：根据PID进行排序
+       5. q ：退出top
+2. 进程管理
+   + kill -signal pid     // -1，-9，-15
+   + killall -signal 命令名称    // 关闭所有以该命令运行的进程
+     + killall -9 bash
+
+### 3.系统信息查看
+
+1. free    // 查看内存使用情况
+   + -m：以MB为单位，-g：以GB为单位，free默认以KB为单位
+2. uname    // 查看系统与内核信息
+   + -a ：所有系统相关信息
+3. netstat    // 查看网络状态
+   + 参数
+     + -a ：列出所有连接
+     + -t ：列出tcp连接
+     + -u ：列出udp连接
+     + -n ：不列出进程服务名称，以端口号显示
+     + -l ：列出目前正在监听的连接
+     + -p ：列出服务进程的pid
+
+## 九.daemons
+
+### 1.概述
+
+### 2.daemon启动
+
+1. 每个daemon启动的进程pid会被记录在/var/run目录下
+2. 相关文件目录
+   + /etc/init.d/*    启动脚本放置处
+   + /etc/sysconfig/*    各服务的初始化环境配置文件
+   + /etc/xinetd.conf    // super daemon主要配置文件
+   + /etc/xinetd.d/*     // super daemon配置文件
+   + /etc/*        // 各服务各自的配置文件
+   + /var/lib/*      // 各服务产生的数据库
+   + /var/run/*     // 各服务程序的PID记录处
+3. 启动
+   + ----------------------stand alone的daemon启动---------------------------------
+   + /etc/init.d/servername options    // servername为服务脚本名，options为运行参数，其实就相当于执行脚本
+     + /etc/init.d/syslog status    // 查看syslog服务状态
+     + /etc/init.d/syslog restart     // 重新读取syslog服务的配置文件
+   + service  [service name]  (start|stop|restart|....)       // 通过service命令运行服务
+     + service crond restart      // 等价于 /etc/init.d/crond restart
+   + ------------------------- super daemon 启动 -------------------------------------------
+   + /etc/init.d/xinetd  restart     // 重新启动xineted这个服务，不过在重新这个服务之前需要先修改配置文件
