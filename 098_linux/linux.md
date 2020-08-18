@@ -766,3 +766,20 @@
      + service crond restart      // 等价于 /etc/init.d/crond restart
    + ------------------------- super daemon 启动 -------------------------------------------
    + /etc/init.d/xinetd  restart     // 重新启动xineted这个服务，不过在重新这个服务之前需要先修改配置文件
+
+## 十.软件安装与管理
+
+1. 安装软件方式
+   + 通过源码安装
+     1. 查看install与readme内容，非必须
+     2. 建立makefile：`./configure`，通过configure或config环境检测脚本生成makefile文件，makefile文件里记录了如何对源代码进行编译的信息
+     3. 清除编译结果：`make clean` ，防止有上次编译的结果
+     4. 编译：`make` ，通过make命令执行makefile文件对源代码进行编译生成可执行文件
+     5. 安装：`make install`
+     6. 注意：源码推荐放在 `/usr/local/src` 下，安装的软件放在 `/usr/local` 下
+     7. example
+        + ./configure --prefix=/leo/software          // --prefix可以用来设置安装到哪，默认为/usr/local
+        + make clean; make
+        + make check
+        + make install
+   + 通过编译好的二进制文件安装
