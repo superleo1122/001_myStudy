@@ -846,3 +846,15 @@
 5. 数据清理
    + clean命令
 
+## 十一.网络命令
+
+1. ifconfig    // 查询、设定网络卡及IP等相关参数
+   + ifconfig      // 查看所有网络接口
+   + ifconfig | grep 'inet'      // 查看ip地址
+2. route    // 查询设定路由表
+   + route -n    // 查看路由状态，添加-n会显示ip，不添加-n的话则会显示hostname
+   + 路由的增加删除略
+3. ip    // 整合了ifconfig和route的功能
+   + ip address show    // 查阅ip信息
+4. ping    // 
+
