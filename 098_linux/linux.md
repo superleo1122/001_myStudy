@@ -769,17 +769,80 @@
 
 ## 十.软件安装与管理
 
-1. 安装软件方式
-   + 通过源码安装
-     1. 查看install与readme内容，非必须
-     2. 建立makefile：`./configure`，通过configure或config环境检测脚本生成makefile文件，makefile文件里记录了如何对源代码进行编译的信息
-     3. 清除编译结果：`make clean` ，防止有上次编译的结果
-     4. 编译：`make` ，通过make命令执行makefile文件对源代码进行编译生成可执行文件
-     5. 安装：`make install`
-     6. 注意：源码推荐放在 `/usr/local/src` 下，安装的软件放在 `/usr/local` 下
-     7. example
-        + ./configure --prefix=/leo/software          // --prefix可以用来设置安装到哪，默认为/usr/local
-        + make clean; make
-        + make check
-        + make install
-   + 通过编译好的二进制文件安装
+### 1.安装软件方式
+
++ 通过源码安装
+  1. 查看install与readme内容，非必须
+  2. 建立makefile：`./configure`，通过configure或config环境检测脚本生成makefile文件，makefile文件里记录了如何对源代码进行编译的信息
+  3. 清除编译结果：`make clean` ，防止有上次编译的结果
+  4. 编译：`make` ，通过make命令执行makefile文件对源代码进行编译生成可执行文件
+  5. 安装：`make install`
+  6. 注意：源码推荐放在 `/usr/local/src` 下，安装的软件放在 `/usr/local` 下
+  7. example
+     + ./configure --prefix=/leo/software          // --prefix可以用来设置安装到哪，默认为/usr/local
+     + make clean; make
+     + make check
+     + make install
++ 通过编译好的二进制文件安装
+
+### 2.rpm
+
++ rpm [options] xxx.rpm
+
++ 安装参数：
+
+  + -i ：install
+  + -v ：查看更详细的安装信息画面
+  + -h ：显示安装进度
+  + --test ：测试是否可以安装
+  + --prefix path ：指定安装路径
+
+  + --------------------------------------------example-------------------------
+
+  + rpm -ivh xxx.rpm
+  + rpm -ivh http://xxx/xxx.rpm
+  + rpm -ivh xxx.rpm --test
+  + rpm -ivh xxx.rpm --prefix /home/leo/soft
+
++ 更新
+
+  + -U ：若已安装，则更新到最新版，否则安装最新版
+  + -F ：若没安装，则不会安装，只更新目前已安装的到最新版
+
++ 查询
+
+  + rpm -qa   // 查看已安装软件
+  + rpm -q python    // 查看python是否安装
+  + rpm -qi python     // 查看python详细信息
+  + rpm -ql python     // 查看python涉及的文件及目录
+  + rpm -qc python      // 查看python的配置文件
+  + rpm -qR python     // 查看python依赖的文件
+  + rpm -qf /usr/share/doc/python-2.7.5/LICENSE      // 查看LICENSE这个文件是属于哪个已安装软件的
+
++ 卸载
+
+  + rpm -e packagename
+
++ 重建rpm数据库
+
+  + rpm --rebuilddb
+
+### 3.yum
+
+1. 查询
+   + yum search python     // 搜索某个软件名称或者描述的重要关键字
+   + yum list      // 列出所有可以安装的软件
+   + yum list installed      // 列出已安装的软件   ==> rpm -qa
+   + yum list updates      // 列出可以升级的软件
+   + yum list pyth*      //  模糊匹配，其实可以这样 yum list | grep 'pyth*'
+   + yum info  python    // 列出python详细信息  ==> rpm -qi python
+   + yum provides fileName      // 通过文件搜索软件  ==> rpm qa fileName
+2. 安装
+   + yum install python
+3. 升级
+   + yum update python
+4. 卸载
+   + yum remove python
+5. 数据清理
+   + clean命令
+
