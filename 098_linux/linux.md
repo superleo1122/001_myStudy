@@ -848,6 +848,8 @@
 
 ## 十一.网络命令
 
+### 1.查询命令
+
 1. ifconfig    // 查询、设定网络卡及IP等相关参数
    + ifconfig      // 查看所有网络接口
    + ifconfig | grep 'inet'      // 查看ip地址
@@ -856,5 +858,80 @@
    + 路由的增加删除略
 3. ip    // 整合了ifconfig和route的功能
    + ip address show    // 查阅ip信息
-4. ping    // 
+4. ping    //  检测节点联通性
+   + ping ip/域名
+   + ping -c 3 ip    // 执行三次ping命令
+   + ping -n ip      // 不反查主机名，直接使用ip输出，速度快
+5. traceroute    // 跟踪节点
+   + traceroute ip
+   + traceroute -n ip  // 不反查主机名
+
+6. netstat    // 查看网络状态
+
+   + 参数
+
+     + -r 列出路由表
+
+     + -n 不反查主机名
+
+     + -a 列出所有联机状态
+
+     + -t 仅列出TCP
+
+     + -u 仅列出UDP
+
+     + -l  仅列出处于监听的服务
+
+     + -p  列出PID与软件名
+
+     + -c num  设定更新时间
+
+   + netstat -rn    // 查看路由表
+
+   + netstat -tulnp    // 查看目前已启动的网络服务
+
+7. host    // 查看主机信息
+
+   + host 域名    // 可以用来查询IP
+
+8. nslookup    // 同host
+
+   + nslookup 域名
+
+### 2.联机命令
+
+1. telnet
+   + 安装: yum install telnet
+   + telnet ip   // 检测ip地址是否能通
+   + telnet ip port    // 检测端口是否可以访问
+   + 退出
+     + ctrl + c
+     + ctrl + ] ，之后再按q
+
+### 3.传输命令
+
+1. ftp
+
+   + 安装：yum install ftp
+   + 登陆：ftp [ip] [port]  ，ex: `ftp 192.168.2.1`
+   + ftp界面常用命令
+     + help
+     + dir    // 显示远程服务器目录内容
+     + cd    // 切换目录
+     + get filename    // 下载指定文件
+     + mget filename*    // 下载多个文件，可使用通配符
+     + put filename      // 上传指定文件到服务器
+     + delete filename    // 删除指定文件
+     + mkdir dirname      // 建立指定目录
+     + lcd path      // 切换到本地主机目录
+     + passive      // 启动或关闭passive模式
+     + binary      // 数据传输模式设定为binary格式
+     + bye    // 退出
+
+   2. wget      // 文件下载
+      + wget url
+
+   ### 4.分析命令
+
+   1. tcpdump    // 抓包命令
 
