@@ -1,6 +1,16 @@
 # Linux基础
 
-## 一.目录结构
+## 一.概述
+
+1. 键
+   + tab : 用于补全
+   + ctrl + c :  中止程序
+   + ctrl + d :  退出，相当于quit
+2. 帮助命令
+   + man    //  查询命令或文件的相关用法
+   + man date
+
+## 二.目录结构
 
 1. 根目录下
    + bin  二进制可执行文件
@@ -19,17 +29,8 @@
      + /usr/local  自己安装的程序
    + **var**  用于存放运行时需要改变数据的文件
 
-## 二.概述
 
-1. 键
-   + tab : 用于补全
-   + ctrl + c :  中止程序
-   + ctrl + d :  退出，相当于quit
-2. 帮助命令
-   + man    //  查询命令或文件的相关用法
-   + man date
-
-## 三.命令
+## 三.常用命令
 
 ### 1.文件与目录操作
 
@@ -68,10 +69,6 @@
 10. find
     + 在文件系统中查找指定的文件
     + find -name 'fileName'
-11. grep
-    + 在指定文本文件中查找指定的字符串
-12. tree
-    + 以树状图列出目录的内容
 13. pwd
     + 显示当前目录的完整路径
 14. ln
@@ -153,7 +150,7 @@
 2. 连接文件：ln
 3. 磁盘分区、挂载与卸载
 
-### 3.系统管理命令
+### 4.系统管理命令
 
 1. stat
    + 显示指定文件的相关信息,比ls命令显示内容更多
@@ -390,29 +387,6 @@
      + 用数字表示权限，0表示没有任何权限，1表示有可执行权限，2表示有可写权限，4表示有可读权限
      + 若要 `rwx` 则需要4+2+1=7，若要`rw-`则需要6，若要`r-x`则需要5...
      + 例子：`chmod 755 fileName`  表示给当前用户可读可写可执行权限，给组用户和其他用户添加可读可执行权限
-
-## 五.软件包管理
-
-### 1.yum
-
-### 2.apt
-
-1. 修改源
-   + vim /etc/apt/source.list
-   + apt-get update  // 更新数据源
-2. 常用命令
-   + **apt-get install packageName**  // 安装
-   + **apt-get remove packageName**  // 卸载
-   + **apt-get remove package --purge**  // 删除包及配置文件
-   + apt-get update  // 更新软件包
-   + apt-get build-dep package   // 安装相关的编译环境
-   + apt-get source package  // 下载源代码
-   + apt-get clean && apt-get autoclean  // 清除无用的包
-   + apt-get check  // 检查
-   + **apt-cache search packageName**  // 搜索包
-   + **apt-cache show package**  // 获取包信息
-   + apt-cache depends package  // 查看包依赖
-   + apt-cache rdepends package  //  查看被哪些包依赖
 
 ## 五.编辑器
 
@@ -846,9 +820,34 @@
 5. 数据清理
    + clean命令
 
-## 十一.网络命令
+### 4.apt
 
-### 1.查询命令
+1. 修改源
+   + vim /etc/apt/source.list
+   + apt-get update  // 更新数据源
+2. 常用命令
+   + **apt-get install packageName**  // 安装
+   + **apt-get remove packageName**  // 卸载
+   + **apt-get remove package --purge**  // 删除包及配置文件
+   + apt-get update  // 更新软件包
+   + apt-get build-dep package   // 安装相关的编译环境
+   + apt-get source package  // 下载源代码
+   + apt-get clean && apt-get autoclean  // 清除无用的包
+   + apt-get check  // 检查
+   + **apt-cache search packageName**  // 搜索包
+   + **apt-cache show package**  // 获取包信息
+   + apt-cache depends package  // 查看包依赖
+   + apt-cache rdepends package  //  查看被哪些包依赖
+
+## 十一.网络
+
+### 1.概述
+
+1. 相关文件
+   + /etc/hosts      // host配置文件
+   + /etc/resolve.conf      // dns配置文件
+
+### 2.查询命令
 
 1. ifconfig    // 查询、设定网络卡及IP等相关参数
    + ifconfig      // 查看所有网络接口
@@ -898,7 +897,7 @@
 
    + nslookup 域名
 
-### 2.联机命令
+### 3.联机命令
 
 1. telnet
    + 安装: yum install telnet
@@ -907,11 +906,29 @@
    + 退出
      + ctrl + c
      + ctrl + ] ，之后再按q
+   
 2. ssh
+
+   + ssh原理
+     + ssh利用公私钥技术对数据进行加密
+     + 客户端和服务端首先交换各自公钥，然后用对方的公钥加密数据进行传输，收到数据后用各自私钥解密
+     + ssh服务的公私钥保存在/etc/ssh目录下
+     + 若想重置密钥，可以先删除密钥然后重启服务重新生成
+       1. rm /etc/ssh/ssh_host*
+       2. /etc/init.d/sshd restart
+
    + ssh username@ip    // 登陆
    + exit    // 退出
 
-### 3.传输命令
+3. ssh免密登陆
+
+   + 原理：生成一对专门的密钥用于身份验证，与/etc/ssh目录下的密钥有区别
+
+   + 步骤
+     1. ssh-keygen    // 客户端运行此命令生成密钥对，默认rsa，生成的密钥对默认保存在/home/username/.ssh目录下
+     2. ssh-copy-id username@ip    // 在本地执行此命令，将本地ssh公钥文件安装到远程主机上，接下来就可以不用密码登陆了
+
+### 4.传输命令
 
 1. ftp
 
@@ -943,7 +960,7 @@
 4. wget      // 文件下载
    + wget url
 
-### 4.分析命令
+### 5.分析命令
 
 1. tcpdump    // 抓包命令
 
