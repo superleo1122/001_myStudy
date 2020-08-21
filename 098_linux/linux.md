@@ -907,6 +907,9 @@
    + 退出
      + ctrl + c
      + ctrl + ] ，之后再按q
+2. ssh
+   + ssh username@ip    // 登陆
+   + exit    // 退出
 
 ### 3.传输命令
 
@@ -923,15 +926,24 @@
      + put filename      // 上传指定文件到服务器
      + delete filename    // 删除指定文件
      + mkdir dirname      // 建立指定目录
-     + lcd path      // 切换到本地主机目录
+     + rmdir dirname    // 删除目录
+     + lcd path      // 切换到本地主机目录，对于本地的其他命令，远程命令加 `l` 就是了
      + passive      // 启动或关闭passive模式
      + binary      // 数据传输模式设定为binary格式
-     + bye    // 退出
+  + bye    // 退出
+2. sftp
+   + sftp username@ip    // 登陆
+   + exit    // 退出
+   + 其余命令同 ftp 
+3. scp    // 适用于已知文件名情况下
+   + scp /etc/hosts* superleo@127.0.0.1:/etc/home/tmp    // 将本机的etc目录下的所有hosts文件上传到127.0.0.1的/etc/home/tmp目录下
+   + scp uperleo@127.0.0.1:/etc/home/test.txt  /home/local    // 将远程的test文件下载到本地的/home/local目录下
+   + 注意：
+     + 若要传输目录，添加 `-r` 参数
+4. wget      // 文件下载
+   + wget url
 
-   2. wget      // 文件下载
-      + wget url
+### 4.分析命令
 
-   ### 4.分析命令
-
-   1. tcpdump    // 抓包命令
+1. tcpdump    // 抓包命令
 
