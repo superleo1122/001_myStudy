@@ -39,6 +39,7 @@
    + ls [options...] [fileFoldName...]
      + -l 列出文件的详细信息
      + -a 列出当前目录所有文件，包含隐藏文件
+     + -d  仅看目录本身
 2. mkdir
    + 创建目录
    + mkdir [-p] dirName
@@ -49,6 +50,9 @@
 4. cd
    + 切换目录
    + cd dirName
+   + cd -     // 切换到上一次的目录
+   + cd ~    // 切换到home目录
+   + cd ..      // 切换到上级目录
 5. touch
    + 生成一个空文件
 6. echo
@@ -138,7 +142,7 @@
    + tail -200f leo.txt  // 持续显示后200行内容
    + head -n 20 leo.txt | tail -n 10    // 显示第11行到20行内容
 
-### 3.文件系统管理
+### 4.文件系统管理
 
 1. 磁盘与目录容量
    + df  // 列出文件系统的整体磁盘使用量，显示的是整个磁盘的信息
@@ -150,7 +154,7 @@
 2. 连接文件：ln
 3. 磁盘分区、挂载与卸载
 
-### 4.系统管理命令
+### 5.系统管理命令
 
 1. stat
    + 显示指定文件的相关信息,比ls命令显示内容更多
@@ -180,7 +184,7 @@
     + kill [options...] pid
     + kill -9 pid
 
-### 3.开关机命令
+### 6.开关机命令
 
 1. stutdown
    + 关机
@@ -189,7 +193,7 @@
 2. reboot
    + 重启
 
-### 4.压缩命令
+### 7.压缩命令
 
 1. tar
    + tar [-cxzjvf] 压缩打包文档名称 欲打包目录
@@ -201,7 +205,7 @@
      + -f  使用档名
      + -tf  查看归档文件里面的文件
    + tar -zcvf test.tar.gz test\   压缩test文件夹
-   + tar -zxvf test.tar.gz  解压文件夹
+   + tar -zxvf test.tar.gz  解压文件
 2. gzip
    + 可以解开zip，gzip等软件的压缩文件
    + gzip [选项] 文件名
@@ -272,10 +276,6 @@
    + passwd -d 用户账户名  // 删除账户口令
 6. 其他
    + useradd,userdel,usermod,passwd都是管理员账号可以使用的命令
-   + 普通账户可使用命令
-     + chsh    // change shell
-       + chsh -l    // 列出可用shell
-       + chsh -s /bin/zsh    // 设置此账户的shell
 7. ----------------------------------------------------------------------------------组管理-----------------------------------------------------------------------------------------
 8. 组账号维护
    + groupadd  组账户名    // 创建新组
@@ -347,6 +347,7 @@
    + who    // 当前已登陆在系统上的用户
    + last     //  所有登陆者信息
    + lastlog   // 每个账号最后登陆信息
+   + history    // 查看当前用户在系统中执行过的命令
 
 ## 四.文件权限管理
 
@@ -502,14 +503,20 @@
 
 7. vim环境设置与记录
 
-## 六.bash及工具
+## 六.shell命令及工具
 
 ### 1.常用命令
 
 + cat /etc/shells     // 查看系统支持哪些shell
++ chsh    // change shell
+  + chsh -l    // 列出可用shell
+  + chsh -s /bin/zsh    // 设置此账户的shell
 + alias    // 为常用命令设置别名
 + type   // 判断命令类型，是外部命令还是shell内置命令
 + source 配置文件    // 使配置文件生效
++ date  // 查看系统时间
+  + date
+  + date "+%Y-%m-%d %H:%M:%s"    // 2020-08-22 12:12:12
 
 ### 2.数据流重定向
 
@@ -519,24 +526,32 @@
   + stdin 标准输入：代码为0，使用 < 或 <<
   + stdout 标准输出：代码为1，使用 > 或 >>  ，也可以 1> 或 1 >>
   + stderr 标准错误输出：代码为2，使用 2> 或2>>
+  
 + 重定向
-  + 1> 或 > ：以覆盖的方法将正确的数据输出到指定的文件和设备上
-  + 1>> 或 >> ：以累计的方法将正确的数据输出到指定的文件和设备上
-  + 2> ：以覆盖的方法将错误的数据输出到指定的文件和设备上
-  + 2>> ：以累加的方法将错误的数据输出到指定的文件和设备上
-  + 2>&1 ：把标准错误输出重定向到标准输出
-  + 1>&2 ：把标准输出重定向到标准错误
-  + &>filename ：把标准输出和标准错误都重定向到filename中
-  + &>>filename ：把标准输出和标准错误都重定向到filename中
+  
+  + 注：> 为覆盖，>>为追加
+  
+  + cmd > filename  / cmd 1> filename：以覆盖的方法将正确的数据输出到指定的文件和设备上
+  + cmd >> filename  / cmd 1>> filename ：以累计的方法将正确的数据输出到指定的文件和设备上
+  + cmd 2> filename ：以覆盖的方法将错误的数据输出到指定的文件和设备上
+  + cmd 2>> filename ：以累加的方法将错误的数据输出到指定的文件和设备上
+  + cmd >> filename 2>&1 ：把标准错误输出重定向到标准输出并以追加的方式输出到filename中
+  + cmd > filename 2>&1 ：把标准错误输出重定向到标准输出并以覆盖的方式输出到filename中
+  + cmd >> filename 1>&2 ：把标准输出重定向到标准错误并以追加的方式输出到filename中
+  + cmd > filename 1>&2 ：把标准输出重定向到标准错误并以覆盖的方式输出到filename中
+  + cmd &>filename ：把标准输出和标准错误都重定向到filename中，覆盖方式
+  + cmd &>>filename ：把标准输出和标准错误都重定向到filename中，追加方式
+  
 + 垃圾数据黑洞
   + /dev/null     // 可以将指定数据进行丢弃
   + find /home -name .bashrc 2>/dev/null    // 只有stdout会显示在屏幕上，stderr会被丢弃
   + cat /dev/null > back.log    // 可以用来清空一个文件
+  
 + 例子
-  + find /home -name .bashrc > list_right 2> list_error     // 将正确数据和错误数据分别输出到不同文件
-  + find /home -name .bashrc 1>> list_right 2>> list_error     // 将正确数据和错误数据分别输出到不同文件
-  + find /home -name .bashrc > list 2>&1  (推荐)   /     find /home -name .bashrc &> list      // 将正确和错误数据写入到同一个文件，这两个方式都可以
-  + find /home -name .bashrc >> list 2>&1  (推荐)   /     find /home -name .bashrc &>> list
+  + f覆盖：find /home -name .bashrc > list_right 2> list_error     // 将正确数据和错误数据分别输出到不同文件
+  + 追加：find /home -name .bashrc 1>> list_right 2>> list_error     // 将正确数据和错误数据分别输出到不同文件
+  + 覆盖：find /home -name .bashrc > list 2>&1   /     find /home -name .bashrc &> list      // 将正确和错误数据写入到同一个文件，这两个方式都可以
+  + 追加：find /home -name .bashrc >> list 2>&1  (推荐)   /     find /home -name .bashrc &>> list
 
 ### 3.逻辑判断 && ||
 
@@ -676,10 +691,17 @@
 
 ### 2.进程管理
 
-1. 进程查看
+1. 进程的5种状态
+   + R  运行：正在运行或在运行队列中等待
+   + S  中断：休眠中，等待某个条件的形成或接收信号
+   + D  不可中断
+   + Z  僵死：进程已中止，但进程描述还存在
+   + T  停止
+2. 进程查看
    + ps
      + 参数：-A 所有进程；-a 不与terminal有关进程；-u 有效用户相关进程；-l 将PID信息详细列出
      + ps aux    // 查看系统所有进程数据
+     + ps aux | grep '进程名'
      + ps -l       // 仅列出与自己bash有关的进程
      + ps -lA    // 查看系统所有数据
    + pstree   // 以进程树方式查看
@@ -696,7 +718,7 @@
        3. M ：根据内存使用进行排序
        4. N ：根据PID进行排序
        5. q ：退出top
-2. 进程管理
+3. 进程管理
    + kill -signal pid     // -1，-9，-15
    + killall -signal 命令名称    // 关闭所有以该命令运行的进程
      + killall -9 bash
@@ -716,11 +738,13 @@
      + -l ：列出目前正在监听的连接
      + -p ：列出服务进程的pid
 
-## 九.daemons
+## 九.守护进程
 
 ### 1.概述
 
-### 2.daemon启动
+1. RHEL7系统替换了初始化进程init，采用全新的初始化进程systemd
+
+### 2.daemon启动 ---- RHEL6及之前版本
 
 1. 每个daemon启动的进程pid会被记录在/var/run目录下
 2. 相关文件目录
@@ -731,15 +755,40 @@
    + /etc/*        // 各服务各自的配置文件
    + /var/lib/*      // 各服务产生的数据库
    + /var/run/*     // 各服务程序的PID记录处
-3. 启动
+3. 启动 ---- 通过脚本启动
    + ----------------------stand alone的daemon启动---------------------------------
    + /etc/init.d/servername options    // servername为服务脚本名，options为运行参数，其实就相当于执行脚本
      + /etc/init.d/syslog status    // 查看syslog服务状态
      + /etc/init.d/syslog restart     // 重新读取syslog服务的配置文件
-   + service  [service name]  (start|stop|restart|....)       // 通过service命令运行服务
-     + service crond restart      // 等价于 /etc/init.d/crond restart
    + ------------------------- super daemon 启动 -------------------------------------------
    + /etc/init.d/xinetd  restart     // 重新启动xineted这个服务，不过在重新这个服务之前需要先修改配置文件
+4. 服务管理命令 service
+   + 除了使用/etc/init.d目录下启动脚本管理服务外，也可以通过service命令进行服务的管理
+   + service  [service name]  (start|stop|restart|....)       // 通过service命令运行服务
+     + service crond start     // 启动服务  （crond为定时任务服务）
+     + service crond restart      // 重启服务 ，等价于 /etc/init.d/crond restart
+     + service crond stop    // 停止服务
+     + service crond reload   // 重新加载服务
+     + service crond status    // 查看服务状态
+5. 启动配置命令 chkconfig
+   + chkconfig crond on     // 开机自动启动
+   + chkconfig crond off    // 开机不自动启动
+   + chkconfig  crond     // 查看crond是否开机启动
+   + chkconfig --list      // 查看各级别下服务的启动与禁止情况
+
+### 3.daemon启动 ---- RHEL7
+
+1. 服务管理命令 systemctl，相当于之前的service命令
+   + systemctl start test.service    // 启动服务
+   + systemctl restart test.service    // 重启服务
+   + systemctl stop test.service    // 停止服务
+   + systemctl reload test.service    // 重新加载配置文件
+   + systemctl status test.service    // 查看服务状态
+   + --------------------------------服务启停、自启--------------------------------
+   + systemctl enable test.service    // 开机自启
+   + systemctl disable test.service    // 开机不自启
+   + systemctl is-enabled test.service    // 是否开机自启
+   + systemctl list-unit-files --type=service    // 查看各个级别下服务的启动与禁用情况
 
 ## 十.软件安装与管理
 
@@ -803,7 +852,10 @@
 
 ### 3.yum
 
-1. 查询
+1. 配置文件
+   + /etc/yum.repos.d
+2. 查询
+   + yum repolist all    // 列出所有仓库
    + yum search python     // 搜索某个软件名称或者描述的重要关键字
    + yum list      // 列出所有可以安装的软件
    + yum list installed      // 列出已安装的软件   ==> rpm -qa
@@ -811,14 +863,20 @@
    + yum list pyth*      //  模糊匹配，其实可以这样 yum list | grep 'pyth*'
    + yum info  python    // 列出python详细信息  ==> rpm -qi python
    + yum provides fileName      // 通过文件搜索软件  ==> rpm qa fileName
-2. 安装
+3. 安装
    + yum install python
-3. 升级
+   + yum reinstall python      // 重新安装
+4. 升级
    + yum update python
-4. 卸载
+5. 卸载
    + yum remove python
-5. 数据清理
-   + clean命令
+6. 数据清理
+   + yum clean alla      // 清除所有仓库缓存
+7. 软件包组
+   + yum grouplist
+   + yum groupinstall 软件包组
+   + yum groupremove 软件包组
+   + yum groupinfo 软件包组
 
 ### 4.apt
 
@@ -845,6 +903,7 @@
 
 1. 相关文件
    + /etc/hosts      // host配置文件
+   + /etc/hostname    // 主机名称
    + /etc/resolve.conf      // dns配置文件
 
 ### 2.查询命令
@@ -916,7 +975,8 @@
      + 若想重置密钥，可以先删除密钥然后重启服务重新生成
        1. rm /etc/ssh/ssh_host*
        2. /etc/init.d/sshd restart
-
+   + ssh配置文件：/etc/ssh/sshd_config
+     
    + ssh username@ip    // 登陆
    + exit    // 退出
 
@@ -926,7 +986,10 @@
 
    + 步骤
      1. ssh-keygen    // 客户端运行此命令生成密钥对，默认rsa，生成的密钥对默认保存在/home/username/.ssh目录下
-     2. ssh-copy-id username@ip    // 在本地执行此命令，将本地ssh公钥文件安装到远程主机上，接下来就可以不用密码登陆了
+     2. ssh-copy-id username@ip    // 在本地执行此命令，将本地ssh公钥文件安装到远程主机上
+     3. 修改/etc/ssh/sshd_config文件，将 `PubkeyAuthentication`  设置为yes
+     4. 若想禁止通过密码登陆，那么可在配置文件中将 `PasswordAuthentication` 设置为no
+     5. 重启服务：systemctl restart sshd
 
 ### 4.传输命令
 
@@ -947,20 +1010,39 @@
      + lcd path      // 切换到本地主机目录，对于本地的其他命令，远程命令加 `l` 就是了
      + passive      // 启动或关闭passive模式
      + binary      // 数据传输模式设定为binary格式
-  + bye    // 退出
+     + bye    // 退出
 2. sftp
    + sftp username@ip    // 登陆
    + exit    // 退出
    + 其余命令同 ftp 
+   
 3. scp    // 适用于已知文件名情况下
    + scp /etc/hosts* superleo@127.0.0.1:/etc/home/tmp    // 将本机的etc目录下的所有hosts文件上传到127.0.0.1的/etc/home/tmp目录下
    + scp uperleo@127.0.0.1:/etc/home/test.txt  /home/local    // 将远程的test文件下载到本地的/home/local目录下
    + 注意：
      + 若要传输目录，添加 `-r` 参数
+   
 4. wget      // 文件下载
+   
+   + 参数
+     + -O dir    // 下载到指定目录
+     + -b      // 后台下载模式
+   
    + wget url
 
 ### 5.分析命令
 
 1. tcpdump    // 抓包命令
+
+## 十二.安全
+
+### 1.iptables
+
+1. 常用命令
+   + iptables -L    // 查看已有规则
+   + iptables -F    // 清空已有规则
+
+## 参考
+
+1. http://cn.linux.vbird.org/linux_server/
 
