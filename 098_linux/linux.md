@@ -1029,6 +1029,24 @@
      + -b      // 后台下载模式
    
    + wget url
+   
+5. curl
+
+   + curl是一个http命令行工具，支持上传和下载
+   + curl [option] url
+   + 参数
+     + -o/--output ：把输出写到该文件中
+     + -O/--remote-name ：把输出写到该文件中，并保留远程文件名
+     + -T/--upload-file ：上传文件
+   + example
+     + curl http://www.baidu.com
+     + curl -o linux.html http://www.linux.com    // 保存网页
+     + curl -O http://www.linux.com/hello.sh    // 保存文件
+     + curl -o /dev/null -s -w %{http_code} www.linux.com    // 测试网页返回值
+     + 设置代理：curl -x 192.168.100.100:1080 http://www.linux.com
+   + 参考
+     + https://www.cnblogs.com/yanguhung/p/10115911.html
+     + http://www.ruanyifeng.com/blog/2019/09/curl-reference.html
 
 ### 5.分析命令
 
