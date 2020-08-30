@@ -208,7 +208,7 @@
    + tar -zcvf test.tar.gz test\   压缩test文件夹
    + tar -zxvf test.tar.gz  解压文件
 2. gzip
-   + 可以解开zip，gzip等软件的压缩文件
+   + 可以解开gzip等软件的压缩文件
    + gzip [选项] 文件名
      + -d  解压文件
      + -l  显示压缩的相关信息
@@ -218,6 +218,9 @@
    + bzip2 [-cdz]
      + -d  解压文件
      + -z  压缩文件
+4. unzip
+   + 解压zip文件
+   + unzip file.zip
 
 ## 三.用户和组
 

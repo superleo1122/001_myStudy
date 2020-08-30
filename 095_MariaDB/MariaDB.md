@@ -72,5 +72,13 @@
 
 1. 新建
    + create database database_name
-2. 
+
+## 待 教程
+
+1. https://www.kaifaxueyuan.com/database/mariadb/mariadb-administration.html
+2. https://www.w3cschool.cn/mariadb/mariadb_administration.html
+3. https://mariadb.com/kb/zh-cn/mariadb-documentation/
+4. https://cloud.tencent.com/developer/article/1184801
+5. https://blog.csdn.net/ghost_leader/article/details/53366942
+6. https://www.cnblogs.com/dayle/p/9941929.html
 

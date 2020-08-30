@@ -8,7 +8,6 @@
    + wordpress-5.5
    + php-7.4.9
    + mariaDB-10.5.5
-   + phpMyAdmin
    + nginx-1.18.0
 
 ## 二.步骤
@@ -48,6 +47,8 @@
      + 下载：http://git.php.net/?p=pecl/database/mysql.git;a=summary
      + 进入下载好的文件目录，依次执行`phpize` `./configure` `make && make install`
      + 修改php.ini添加mysql.so扩展
+6. 扩展
+   + php-fpm原理：https://www.cnblogs.com/donghui521/p/10334776.html
 
 ### 3.nginx安装
 
@@ -66,3 +67,5 @@
 2. 数据库配置
 3. 其他操作
    + 开启debug模式查看日志
+
+## 三.wordpress
