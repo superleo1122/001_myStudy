@@ -151,6 +151,7 @@
      + du -sh   // 以易读方式列出当前目录容量
      + du -sh /mysoft/*    // 以易读方式列出mysoft目录下所有文件和目录的大小
      + -s  ：列出总量
+     + du -h --max-depth=1    // 查看当前目录下所有目录及文件大小
 2. 连接文件：ln
 3. 磁盘分区、挂载与卸载
 
@@ -284,6 +285,7 @@
      + 修改组
      + -g ：修改组GID
      + -n :  修改组账户名
+     + example：groupmod -n newName oldName
    + groupdel
      + groupdel 组账号名  // 删除指定组账号
    + gpasswd
@@ -340,6 +342,10 @@
            ```
 
          + user1,user2,user3只要输入 `sudo su-` ，然后输入自己账号密码，则会立刻变为root身份
+         
+      5. 修改普通用户免密sudo的时长
+      
+         + 找到`Defaults env_reset`，修改为`Defaults env_reset, timestamp_timeout=x`，x表示时间，单位为分钟，设置为0表示每次使用sudo均需要输入密码
 
 ### 6.用户信息
 
@@ -351,43 +357,56 @@
 
 ## 四.文件权限管理
 
-1. 查看文件和目录权限
-   + ls -l
-   + 显示信息 ：`drwxr-xr-x 10 root root     4096 Jun 16 17:56 NeteaseCloudMusicApi-master`
-     + 文件类型，文件权限，文件所属用户，文件所属组，文件的大小，文件的创建时间，文件的名称
-       + 文件类型：d 表示目录，l 表示软链接，- 表示文件
-       + 文件权限三个字符为一组，r 只读，w 可写，x 可执行，- 表示无此权限，第一组为当前用户权限，第二组为用户组权限，第三组为其他用户权限
-       + 连接数，指有多少个文件指向同一个索引节点
-2. chown  : 更改文件所有者 chang owner
-   + 更改文件所属用户及所属组
-     + chown -R 用户名称 文件或者目录    // 更改文件所属用户，-R 为递归更改，表示将目录下所有文件及文件夹进行变更
-       + `chown -R superleo foldName`  
-     + chown -R 用户名称:用户组名称 文件或目录  // 更改用户及用户组
-       + `chown -R superleo:leo foldNameq`
-3. chgrp :  改变文件所属组
-   + chgrp leo test.log     // 将test.log文件添加到leo组
-   + chgrp -R leo test       //  递归遍历test文件夹并将其添加到leo组 n
-4. chmod ：更改文件权限
-   + chmod [who] [ + 或者 - 或者 =] [mode] 文件名
-     + who 表示操作对象，可以是下面的一个或者组合
-       + u : 用户user
-       + g : 用户组group
-       + o : 表示其他用户
-       + a : 表示所有用户
-     + 操作符号
-       + `+` : 表示添加某个权限
-       + `-` : 表示取消某个权限
-       + `=` : 表示赋予给定权限，取消文档以前的所有权限
-     + mode 表示权限
-       + r
-       + w
-       + x
-     + 文件名可以用空格分开
-     + 例子 `chmod u=rwx,g+r,o+r test.txt`  给当前用户添加可读可写可执行权限，给组用户和其他用户添加可读权限
-   + 数字设定法
-     + 用数字表示权限，0表示没有任何权限，1表示有可执行权限，2表示有可写权限，4表示有可读权限
-     + 若要 `rwx` 则需要4+2+1=7，若要`rw-`则需要6，若要`r-x`则需要5...
-     + 例子：`chmod 755 fileName`  表示给当前用户可读可写可执行权限，给组用户和其他用户添加可读可执行权限
+### 1.查看文件和目录权限
+
++ ls -l
++ 显示信息 ：`drwxr-xr-x 10 root root     4096 Jun 16 17:56 NeteaseCloudMusicApi-master`
+  + 文件类型，文件权限，文件所属用户，文件所属组，文件的大小，文件的创建时间，文件的名称
+    + 文件类型：d 表示目录，l 表示软链接，- 表示文件
+    + 文件权限三个字符为一组，r 只读，w 可写，x 可执行，- 表示无此权限，第一组为当前用户权限，第二组为用户组权限，第三组为其他用户权限
+    + 连接数，指有多少个文件指向同一个索引节点
+
+### 2.chown
+
++ chown：更改文件所有者 chang owner
+
++ 更改文件所属用户及所属组
+  + chown -R 用户名称 文件或者目录    // 更改文件所属用户，-R 为递归更改，表示将目录下所有文件及文件夹进行变更
+    + `chown -R superleo foldName`  
+  + chown -R 用户名称:用户组名称 文件或目录  // 更改用户及用户组
+    + `chown -R superleo:leo foldNameq`
+
+### 3.chgrp
+
++ chgrp： 改变文件所属组
+
++ chgrp leo test.log     // 将test.log文件添加到leo组
++ chgrp -R leo test       //  递归遍历test文件夹并将其添加到leo组 n
+
+### 4.chmod 
+
++ chmod ：更改文件权限
+
++ chmod [who] [ + 或者 - 或者 =] [mode] 文件名
+  + who 表示操作对象，可以是下面的一个或者组合
+    + u : 用户user
+    + g : 用户组group
+    + o : 表示其他用户
+    + a : 表示所有用户
+  + 操作符号
+    + `+` : 表示添加某个权限
+    + `-` : 表示取消某个权限
+    + `=` : 表示赋予给定权限，取消文档以前的所有权限
+  + mode 表示权限
+    + r
+    + w
+    + x
+  + 文件名可以用空格分开
+  + 例子 `chmod u=rwx,g+r,o+r test.txt`  给当前用户添加可读可写可执行权限，给组用户和其他用户添加可读权限
++ 数字设定法
+  + 用数字表示权限，0表示没有任何权限，1表示有可执行权限，2表示有可写权限，4表示有可读权限
+  + 若要 `rwx` 则需要4+2+1=7，若要`rw-`则需要6，若要`r-x`则需要5...
+  + 例子：`chmod 755 fileName`  表示给当前用户可读可写可执行权限，给组用户和其他用户添加可读可执行权限
 
 ## 五.编辑器
 
@@ -802,10 +821,13 @@
   5. 安装：`make install`
   6. 注意：源码推荐放在 `/usr/local/src` 下，安装的软件放在 `/usr/local` 下
   7. example
-     + ./configure --prefix=/leo/software          // --prefix可以用来设置安装到哪，默认为/usr/local
-     + make clean; make
-     + make check
-     + make install
+     + ./configure
+       + --prefix=/leo/software          // 生成makefile文件，--prefix可以用来设置安装到哪，默认为/usr/local
+       + --help   // 查看配置参数有哪些
+     + make clean      // 先清除上次的编译文件
+     + make    // 编译源码
+     + make test   / make check         // 检查是否能正确安装
+     + make install    // 安装编译后的可执行文件
 + 通过编译好的二进制文件安装
 
 ### 2.rpm
