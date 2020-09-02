@@ -267,12 +267,18 @@
      + -s :  shell
      + -d :  用户目录
      + -D ：查看useradd默认值
+   + useradd -g groupName username    // 新建用户并添加到指定组
 3. userdel
    + 删除用户
    + userdel username
      + -r  ：删除账号时同时删除目录
 4. usermod
    + 对账号信息进行微调
+   + usermod -l newName oldName    // 修改用户名
+     + 修改名称前需要先杀掉该用户的所有进程：
+     + pkill -u 用户名
+     + pkill -9 -u 用户名
+   + usermod -d 
 5. 口令维护
    + **passwd 用户账户名**  // 设置用户口令
    + passwd -l 用户账户名  // 锁定用户账户
