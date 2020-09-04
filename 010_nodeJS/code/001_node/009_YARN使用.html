@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14-YARN使用</title>
+</head>
+<body>
+<!--
+    1.什么是YARN?
+    Yarn是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具
+    Yarn 是为了弥补 npm5.0之前 的一些缺陷而出现的
+
+    注意点:
+    在npm5.0之前，yarn的优势特别明显.但是现在NPM已经更新到6.9.x甚至7.x了,
+    随着NPM的升级NPM优化甚至超越Yarn,所以个人还是建议使用NPM
+
+    2.NPM5.0之前的缺陷:
+    2.1npm install的时候巨慢
+       npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装
+    2.2同一个项目，npm install的时候无法保持一致性
+      “5.0.3”表示安装指定的5.0.3版本，
+      “~5.0.3”表示安装5.0.X中最新的版本，
+      “^5.0.3”表示安装5.X.X中最新的版本
+    2.3... ...
+
+    3.YARN优点:
+    3.1速度快:
+        - 并行安装: 而 Yarn 是同步执行所有任务，提高了性能
+        - 离线模式：如果之前已经安装过一个软件包，用Yarn再次安装时之间从缓存中获取，就不用像npm那样再从网络下载了
+    3.2安装版本统一：
+        - 为了防止拉取到不同的版本，Yarn 有一个锁定文件 (lock file) 记录了被确切安装上的模块的版本号
+    3.3... ...
+
+    4.YARN的安装
+    npm install -g yarn
+    yarn --version
+
+    5.YARN使用
+    5.1初始化包
+    npm init -y
+    yarn init -y
+
+    5.2安装包
+    npm install xxx --save
+    yarn add xxx
+    npm install xxx --save-dev
+    yarn add xxx --dev
+
+    5.3移除包
+    npm uninstall xxx
+    yarn remove xxx
+
+    5.4更新包
+    npm update xxx
+    yarn upgrade xxx --latest
+
+    5.5全局安装
+    npm install -g xxx
+    npm uninstall -g xxx
+    npm update -g xxx
+
+    yarn global add xxx
+    yarn global upgrade xxx
+    yarn global remove xxx
+-->
+</body>
+</html>

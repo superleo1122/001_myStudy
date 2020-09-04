@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+    在NodeJS中导出模块中的变量函数有三种方式
+    1. exports.xxx = xxx
+    2. module.exports.xxx = xxx
+    3. global.xxx = xxx
+
+    无论通过哪种方式导出，都需要先导入require才能使用
+    通过global.xxx方式导出不符合CommonJS规范，不推荐使用
+
+    exports 和 module.exports 区别
+    1. exports只能通过exports.xxx方式导出数据，不能直接赋值(例如 exports = name)
+    2. module.exports既可以通过module.exports.xxx方式导出数据，也可以直接赋值 (可以这样 module.exports = name)
+    注意：在开发中不要直接赋值，这个问题只会出现在面试过程中
+-->
+</body>
+</html>
