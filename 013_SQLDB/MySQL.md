@@ -212,7 +212,10 @@
 
 ### 1.查
 
-1. where支持的运算符
+1. 通过查询语句查询出来的结果称之为结果集，结果集以表的形式将查询结果返回，结果集存储在内存中。
+2. select [查询选项] 字段名称 [from 表名] [where 条件] [order by 排序] [group by 分组] [having 条件] [limit 分页];
+3. where支持的运算符
+
    + `=` (等于)、`!=` (不等于)、`<>` (不等于) 
    + `<` 、`<=`、`>`、`>=`
    + IN(set)    // 固定值范围
@@ -222,7 +225,46 @@
    + OR    // 并集
    + NOT
    + LIKE
-2. select field1,field2 from table_name [where 条件]
+4. 通过as给查询的字段指定别名
+5. 通过伪表(dual)的方式让字段表达式符合MySQL规范
+   + select 6+6 from dual;    // dual是一张不存在的虚拟的表
+
+#### 1.1单表查询
+
+1. 模糊查询
+   + select 字段 from 表名 where 字段 like '条件';
+   + 通配符
+     + `_`：表示任意一个字符
+     + `%`：表示任意0~n个字符
+   + example
+     + select * from person where name like 'a_';    // 可以匹配ab
+     + select * from person where name like 'z%';    // 可以匹配abbbbb
+2. 排序
+   + select 字段 from 表名 order by 字段 [asc | desc];
+     + asc：升序    // 默认就是升序
+     + desc：降序
+3. 聚合函数
+   + count()    // 统计
+     + select count(*) from person;
+   + sum()    // 求和
+     + select sum(id) from person;
+   + avg()    // 求平均值
+     + select avg(score) from person;
+   + max()    // 获取最大值
+     + select max(score) from person;
+   + min()    // 获取最小值
+     + select min(score) from person;
+4. 数值处理函数
+   + rand()    // 生成随机数
+     + select rand() from dual;
+     + select * from stu order by rand();
+   + round()    // 四舍五入
+   + ceil(); #向上取整
+   + floor(); #向下取整
+   + truncate(); #截取小数位
+5. 字符串处理函数
+
+#### 1.2多表查询
 
 ### 2.增
 
@@ -268,7 +310,7 @@
 
 1. 作用：唯一标识每条数据
 
-2. 添加主键约束
+2. 建表时添加主键约束
 
    + ```mysql
      # 方式1
@@ -290,7 +332,10 @@
      );
      ```
 
-3. 特点
+3. 修改主键约束
+   + alter table 表名 add primary key(字段)
+     + ex：alter table person add primary key(id);
+4. 特点
    + 主键取值不可重复，且不能为null
    + 一张表仅能有一个主键
    + 可以用多个字段组成联合主键
@@ -299,7 +344,7 @@
 
 1. 作用：用于保证某个字段值永不重复
 
-2. 添加唯一约束
+2. 建表时添加唯一约束
 
    + ```mysql
      create table person2(
@@ -308,9 +353,12 @@
      );
      ```
 
-   + 
+3. 修改唯一约束
 
-3. 特点
+   + alter table 表名 add unique(字段);
+     + ex：alter table person add unique(name);
+
+4. 特点
 
    + 唯一约束取值可以为null
    + 一张表中可以有多个唯一约束
@@ -319,7 +367,7 @@
 
 1. 自动增长约束的作用是让某个字段的取值从1开始递增, 从而保证实体完整性
 
-2. 添加自动增长列
+2. 建表时添加自动增长列
 
    + ```mysql
      create table person(
@@ -328,17 +376,45 @@
      );
      ```
 
-   + 
+   + 设置自动增长的字段必须是主键
 
-     + ```mysql
-       
-       ```
-    
-     + 设置自动增长的字段必须是主键
+3. 修改自动增长列
+
+   + alter table 表名 modify 字段名称 数据类型 auto_increment;
+     + ex：alter table person modify id int auto_increment;
 
 ### 2.域完整性
 
+1. 域：一行数据中的每个单元格都是一个域
+
+2. 域完整性：确保每个单元格数据的正确性
+
+3. 方式
+
+   + 使用正确的数据类型，例如年龄(不会超过255，且不能为负)可以使用 TINYINT UNSIGNED。
+   + 使用非空约束 (not null)
+   + 使用默认值 (default)
+
+4. example
+
+   + ```mysql
+     create table person(
+         id int,
+         name varchar(20) not null,
+         address varchar(64) default '巴塞罗那'
+     );
+     ```
+
 ### 3.参照完整性
+
+1.  参照完整性又称引用完整性, 主要用于保证多表之间引用关系的正确性。
+2. 表与表之间的关系
+   + 一对一关系 （不需要拆分）
+   + 一对多关系（需要拆分，可以拆分为两个实体表）
+   + 多对多关系（需要拆分，可以拆分为两个实体表，一个中间关系表）
+3. 这里可以使用外键来确保，但实际工作中禁止使用外键。
+
+# 七.索引
 
 
 
