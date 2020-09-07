@@ -208,9 +208,9 @@
 
 1. set(值1, 值2, ...)    // 在工作中不使用
 
-## 2.增删改查
+## 2.查询
 
-### 1.查
+### 2.1概述
 
 1. 通过查询语句查询出来的结果称之为结果集，结果集以表的形式将查询结果返回，结果集存储在内存中。
 2. select [查询选项] 字段名称 [from 表名] [where 条件] [order by 排序] [group by 分组] [having 条件] [limit 分页];
@@ -229,56 +229,147 @@
 5. 通过伪表(dual)的方式让字段表达式符合MySQL规范
    + select 6+6 from dual;    // dual是一张不存在的虚拟的表
 
-#### 1.1单表查询
+### 2.2单表查询
 
-1. 模糊查询
-   + select 字段 from 表名 where 字段 like '条件';
-   + 通配符
-     + `_`：表示任意一个字符
-     + `%`：表示任意0~n个字符
-   + example
-     + select * from person where name like 'a_';    // 可以匹配ab
-     + select * from person where name like 'z%';    // 可以匹配abbbbb
-2. 排序
-   + select 字段 from 表名 order by 字段 [asc | desc];
-     + asc：升序    // 默认就是升序
-     + desc：降序
-3. 聚合函数
-   + count()    // 统计
-     + select count(*) from person;
-   + sum()    // 求和
-     + select sum(id) from person;
-   + avg()    // 求平均值
-     + select avg(score) from person;
-   + max()    // 获取最大值
-     + select max(score) from person;
-   + min()    // 获取最小值
-     + select min(score) from person;
-4. 数值处理函数
-   + rand()    // 生成随机数
-     + select rand() from dual;
-     + select * from stu order by rand();
-   + round()    // 四舍五入
-   + ceil(); #向上取整
-   + floor(); #向下取整
-   + truncate(); #截取小数位
-5. 字符串处理函数
+#### 1.模糊查询
 
-#### 1.2多表查询
++ select 字段 from 表名 where 字段 like '条件';
++ 通配符
+  + `_`：表示任意一个字符
+  + `%`：表示任意0~n个字符
++ example
+  + select * from person where name like 'a_';    // 可以匹配ab
+  + select * from person where name like 'z%';    // 可以匹配abbbbb
 
-### 2.增
+#### 2.排序
+
++ select 字段 from 表名 order by 字段 [asc | desc];
+  + asc：升序    // 默认就是升序
+  + desc：降序
+
+#### 3.分组
+
++ select 分组字段 || 聚合函数 from 表名 group by 分组字段;
+  + 注：select 后面必须是分组字段或者聚合函数, 否则就只会返回第一条数据
++ select city, count(*) from stu group by city;    // 统计每个城市有多少人
+
+#### 4.having
+
++ having与where区别
+  + where是去数据库中查询符合条件的数据
+  + having是去结果集中查询符合条件的数据
++ ex：select city, avg(score) as average from stu group by city having average>=60;
+
+#### 5.分页
+
++ select 字段 from 表 limit 索引, 个数;
+
+#### 6.distinct
+
++ distinct: 去除结果集中重复的数据之后再显示
++ ex：select distinct name from stu;
+
+#### 7.聚合函数
+
++ count()    // 统计
+  + select count(*) from person;
++ sum()    // 求和
+  + select sum(id) from person;
++ avg()    // 求平均值
+  + select avg(score) from person;
++ max()    // 获取最大值
+  + select max(score) from person;
++ min()    // 获取最小值
+  + select min(score) from person;
+
+#### 8.数值处理函数
+
++ rand()    // 生成随机数
+  + select rand() from dual;
+  + select * from stu order by rand();
++ round()    // 四舍五入
+  + select round(3.1) from dual;
++ ceil();  // 向上取整
+  + select ceil(3.1) from dual;
++ floor();   // 向下取整
+  + select floor(3.9) from dual;
++ truncate();  // 截取小数位
+  + select truncate(3.1234567, 2) from dual;
+
+#### 9.字符串处理函数
+
++ ucase();   // 转换为大写
+  + select ucase('hello world') from dual;
++ lcase();   // 转换为小写
+  + select lcase('HELLO WORLD') from dual;
++ left();   // 从左边开始截取到指定的位置
+  + select left('1234567890', 3) from dual;
++ right();  // 从右边开始截取到指定的位置
+  + select right('1234567890', 3) from dual;
++ substring();   // 从指定位置开始截取指定个字符
+  + select substring('1234567890', 3, 5) from dual;
+
+### 2.3多表查询
+
+#### 0.概述
+
++ 多表
+
+#### 1.多表查询
+
++ select * from 表名1, 表名2;
++ 多表查询的结果是笛卡尔集
+
+#### 2.union
+
++ union：在纵向上将多张表的结果结合起来返回给我们
++ select * from 表名1 union select * from 表名2;
+  + ex：select id, name from stu union select id, score from grade;
++ 注意点
+  + 使用union进行多表查询, 返回的结果集的表头的名称是第一张表的名称
+  + 使用union进行多表查询, 必须保证多张表查询的字段个数一致
+  + 使用union进行多表查询, 默认情况下会自动去重
+  + 使用union进行多表查询, 如果不想自动去重, 那么可以在union后面加上all
+    + select id, name from stu union all select id, name from person;
+
+#### 3.内连接
+
++ select * from 表名1 inner join 表名2 on 条件;
+  + ex：select stu.id, stu.name, grade.score from stu inner join grade on stu.id = grade.stuId;
++ 注意点
+  + 在内连接中只会返回满足条件的数据
+
+#### 4.外连接
+
++ left join 左外连接
++ right join 右外连接
+
+
+
+#### 5.子查询
+
++ 将一个查询语句查询的结果作为另一个查询语句的条件来使用
+  + ex：select name from stu where stuId in(select stuId from grade where score >= 60);
++ 将一个查询语句查询的结果作为另一个查询语句的表来使用
+  + ex：select name, city, score from (select name, city, score from person where score >= 60) as t;
+  + 注意点
+    + 如果要将一个查询语句查询的结果作为另一个查询的表来使用, 那么必须给子查询起一个别名
+
+## 3.增删改
+
+### 3.1增
 
 1. insert into table_name (字段1,字段2) values (值1,值2);
    + ex：insert into person (id,name) values (1,'leo');    
    + ex：insert into person (id,name) values (1,'leo'),(2,'tom');    // 同时插入多条数据
 
-### 3.删
+### 3.2删
 
 1. delete from table_name [where 条件]
    + delete from person where id = 2;
    + delete from person;    // 删除所有数据
 
-### 4.改
+### 3.3改
 
 1. update table_name set 字段名称=值 [where 条件]
    + ex：update person set name='leo';    // 没有指定条件，则会更新全表的name字段
