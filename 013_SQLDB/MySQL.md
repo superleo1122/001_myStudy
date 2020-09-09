@@ -599,7 +599,275 @@
 
 # 九.视图
 
-# 十.存储过程
+## 1.基本概念
 
++ 视图本质就是将结果集缓存起来
++ 由于结果集是一张虚拟的表, 所以视图也是一张虚拟的表
++ 由于结果集是建立在表的基础上的, 所以视图也是建立在表的基础上的
 
+## 2.视图作用
 
++ 视图可以用来简化SQL语句
++ 视图可以用来隐藏表的结构
++ 视图可以用来提升数据安全性
+
+## 3.视图管理
+
++ 略
+
+# 十.预处理
+
+1. 预先对sql进行解析编译，提升执行速度
+
+2. 流程例子
+   + prepare stmt from 'select * from stu where id=?;';    // 准备预处理sql语句
+   + set @id=1;    // 准备数据
+   + execute stmt using @id;    // 执行sql
+   + set @id=2;
+   + execute stmt using @id;
+   
+   在MySQL中定义变量
+   
+   + 全局变量：@变量名称
+   + 给变量赋值: set @变量名称=值;
+
+# 十一.存储过程
+
+## 1.概念
+
+1. 存储过程和其它编程语言的函数很像, 可以用于封装一组特定功能的SQL语句集，用户通过'call 存储过程的名称()' 来调用执行它。
+
+## 2.语法
+
+1. 定义
+
+   + ```mysq
+     create procedure 存储过程名称(形参列表)
+     begin
+         // sql语句
+         // ... ...
+     end;
+     
+     示例1--无参:
+     create procedure show_stu()
+     begin
+         select * from stu;
+     end;
+     
+     示例2--有参:
+     create procedure show_stu_by_id(stuId int)
+     begin
+         select * from stu where id=stuId;
+     end;
+     
+     示例3--有输入输出
+     create procedure show_stu_by_id2(in stuId int, out stuName varchar(255))
+     begin
+         select name into stuName from stu where id=stuId;
+     end;
+     ```
+     
+   + MySQL存储过程中的参数分为:
+
+     + in  输入参数[默认]
+     + out  输出参数
+     + inout 输入输出参数
+     + 示例略
+
+2. 调用
+
+   + call 存储过程名称(参数);
+
+3. 查看存储过程
+
+   + 查看MySQL中所有存储过程
+     + show procedure status;
+   + 查看指定数据库中的存储过程
+     + show procedure status where db='db_name';
+   + 查看指定存储过程的源代码
+     + show create procedure show_stu;
+
+4. 删除存储过程
+
+   + drop procedure show_stu;
+
+## 3.定义变量
+
+1. 全局变量
+
+   + 定义: @变量名称;
+
+   + 赋值: set @全局变量名称=值;
+
+     + select 字段名称 into @全局变量名称 from 表名;
+
+   + example
+
+     + ```mysql
+       set @stuId = 2;
+       set @stuName = '';
+       select name into @stuName from stu where id=@stuId;
+       select @stuName from dual;
+       ```
+
+2. 局部变量
+
+   + 定义: declare 变量名称 数据类型;
+
+   + 赋值: set 局部变量名称=值;
+
+     + select 字段名称 into 局部变量名称 from 表名;
+
+   + 局部变量只能在存储过程和函数中定义, 所以也称之为存储过程变量
+
+   + example
+
+     + ```mysql
+       create procedure show_stu3()
+       begin
+           declare stuId int default 1;
+           declare stuName varchar(255);
+           # set stuId = 2;
+           select name into stuName from stu where id = stuId;
+           select stuName from dual;
+       end;
+       ```
+
+# 十二.自定义函数
+
+## 1.概念
+
++ 自定义函数和存储过程很像, 只不过自定义函数不需要手动通过call调用，而是和其它的聚合函数一样会在SQL语句中自动被调用
++ ex：select 函数名(形参) from stu;
+
+## 2.使用
+
+1. 创建自定义函数
+
+   + ```mysql
+     create function 函数名(形参列表) returns 数据类型 函数特征
+     begin
+     sql语句;
+     ... ...
+     return 值;
+     end;
+     ```
+
+   + 函数特征
+
+     + DETERMINISTIC 不确定的
+     + NO SQL 没有SQl语句，当然也不会修改数据
+     + READS SQL DATA 只是读取数据，不会修改数据
+     + MODIFIES SQL DATA 要修改数据
+     + CONTAINS SQL 包含了SQL语句
+
+2. 调用函数
+
+   + select 函数名称(参数) from dual;
+
+3. 查看函数
+
+   + 查看所有函数
+     + show function status;
+   + 查看指定数据库中的函数
+     + show function status where db='db_name';
+   + 查看函数源代码
+     + show create function show_stu;
+
+4. 删除函数
+
+   + drop function show_stu;
+
+## 3.其他语句
+
+   ### 1. if语句
+
++ ```mysql
+  if 条件表达式 then
+  ... ...
+  elseif 条件表达式 then
+  ... ...
+  else
+  ... ...
+  end if;
+  
+  示例一:
+  create function fn_test2(score int) returns varchar(255) DETERMINISTIC
+  begin
+  declare result varchar(255) default '';
+  if score < 0 || score > 100 then
+  set result = '没有这个分数';
+  elseif score < 60 then
+  set result = '不及格';
+  elseif score < 80 then
+  set result = '良好';
+  else
+  set result = '优秀';
+  end if;
+  return result;
+  end;
+  ```
+
+### 2.CASE语句
+
++ ```mysql
+  case
+  when 条件表达式 then
+  ... ...
+  when 条件表达式 then
+  ... ...
+  end case;
+  
+  示例:
+  create function fn_test3(score int) returns varchar(255) DETERMINISTIC
+  begin
+  declare result varchar(255) default '';
+  case
+  when score=100 then
+  set result = '还需努力';
+  when score=0 then
+  set result = '不需要努力了';
+  end case;
+  return result;
+  end;
+  ```
+
+### 3.循环语句
+
++ ```mysql
+  while 条件表达式 do
+      ... ...
+  end while;
+  
+  示例: 1 + n的和 / 1 + 2 + 3 + 4 + 5
+  create function fun_test4(num int)returns int DETERMINISTIC
+  begin
+  declare sum int default 0;
+  declare currentIndex int default 1;
+  
+  while currentIndex <= num do
+      set sum = sum + currentIndex;
+      set currentIndex = currentIndex + 1;
+  end while;
+  
+  return sum;
+  end;
+  ```
+
++ ```mysql
+  until 条件表达式 end repeat;
+  
+  示例:
+  create function fun_test6(num int)returns int DETERMINISTIC
+  begin
+  declare sum int default 0;
+  declare currentIndex int default 1;
+  repeat
+      set sum = sum + currentIndex;
+      set currentIndex = currentIndex + 1;
+  until currentIndex > num end repeat;
+  return sum;
+  end;
+  ```
+
++ 
