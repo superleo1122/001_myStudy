@@ -64,7 +64,10 @@
 
 1. 新建用户
    + create user 'user_name'@localhost identified by 'password';
-2. 
+   + create user 'user_name'@'%' identified by 'password';  // 允许从任何ip登录
+2. 授权
+   + GRANT all privileges ON databasename.tablename TO 'username'@'host' 
+   + GRANT all privileges ON databasename.* TO 'username'@'%'   // 为指定用户赋予指定数据库所有表的权限，从任何ip登录都有所有权限
 
 ### 3.权限管理
 
