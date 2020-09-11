@@ -103,7 +103,7 @@
 
 4. **find**    // 查找指定目录下文件，扫描磁盘速度慢
 + 非管理员账户通过 sudo 执行，否则会遇到权限问题
-   
+  
 + find /home -name "fileName"    // 查找home目录下指定文件 
    + find / -name "fileNa*"     // 结合通配符查找时一定要加上引号，否则查找结果不全
    + find -name "fileNa*"     // 不加路径参数时，默认查找当前目录下文件
@@ -923,6 +923,7 @@
    + route -n    // 查看路由状态，添加-n会显示ip，不添加-n的话则会显示hostname
    + 路由的增加删除略
 3. ip    // 整合了ifconfig和route的功能
+   
    + ip address show    // 查阅ip信息
 4. ping    //  检测节点联通性
    + ping ip/域名
@@ -951,11 +952,13 @@
      + -p  列出PID与软件名
 
      + -c num  设定更新时间
-
+   
    + netstat -rn    // 查看路由表
-
+   
    + netstat -tulnp    // 查看目前已启动的网络服务
-
+   
+   + netstat -antp | grep mongod
+   
 7. host    // 查看主机信息
 
    + host 域名    // 可以用来查询IP
