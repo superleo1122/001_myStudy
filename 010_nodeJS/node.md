@@ -1,6 +1,6 @@
-# 一、Node.js
+# Node.js
 
-## 1. Node.js概述
+## 一. Node.js概述
 ### 1. Node.js概述
 1. Node.js是一个基于"Chrome V8引擎"的JavaScript"运行环境"
 2. Nvm运行在一台电脑中装多个nodejs的版本
@@ -74,7 +74,37 @@
 
    Yarn 是为了弥补 npm5.0之前 的一些缺陷而出现的
 
-## 2. 核心API
+### 5.NODE_ENV
+
+1. NODE_ENV是一个环境变量
+
+2. 设置NODE_ENV
+
+   + windows
+     + set NODE_ENV  // 先查看NODE_ENV是否存在
+     + set NODE_ENV=production  // 如果不存在则添加环境变量
+     + set NODE_ENV=    // 若存在则需要先删除
+   + Linux
+     + echo $NODE_ENV    // 查看NODE_ENV是否存在
+     + export NODE_ENV=production     // 不存在则添加环境变量
+     + unset NODE_ENV    // 删除环境变量
+   + NODE_ENV保存在process.env中，可通过`console.log(process.env.NODE_ENV)`查看
+
+3. cross-env
+
+   + 此包可以解决不同系统间命令兼容问题
+
+   + ```sh
+     # 安装
+     npm install --save-dev cross-env
+     # 使用
+     "scripts": {
+       "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js",
+       "build": "cross-env NODE_ENV=pro nodemon ./bin/www.js",
+     }
+     ```
+
+## 二. 核心API
 
 ### 1. Buffer
 
@@ -88,9 +118,20 @@
 
 ### 6. querystring模块
 
-## 3. 第三方包
+## 三. 第三方包
 
 ### 1. nodemon
 
 1. 监视服务端应用程序文件改变的包，一旦服务器文件改变，会自动重启服务
-2. 使用命令：npx nodemon app.js
+2. 本地安装使用
+   + npm i nodemon
+   + npx nodemon app.js
+3. 全局安装使用
+   + npm i nodemon -g
+   + nodemon app.js
+
+### 2.Ajv
+
+1. JSON Schema：定义了JSON格式的规范，利用这个规范可以对数据进行校验
+2. Ajv是一个能根据JSON Schema对数据进行校验的node库
+3. https://www.npmjs.com/package/ajv
